@@ -6,7 +6,15 @@
     .animated-image {
         animation: moveUpDown 4s infinite; 
       }
-
+    
+    .top-heading{
+      padding-top: 5vh;
+      font-size: 48px;
+      line-height: 60px;
+      font-family: Nunito, sans-serif;
+      color: #800080;
+      font-weight: 700;
+    }
     
   
 }

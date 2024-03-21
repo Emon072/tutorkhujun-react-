@@ -8,12 +8,12 @@ function HomePart1() {
       <div className="container-fluid home-style">
         <div className="container">
           <div className="row">
-            <div className="col-6" style={{ height: '50vh' , backgroundColor:'aqua'}}>
-                <p style={{fontSize:'46px'}}>Best Tutoring Platform For Home & Online Tutions</p>
+            <div className="col-8" style={{ height: '50vh'}}>
+                <p className="top-heading">Best <span style={{color:'#3C65F5'}}>Tutoring Platform</span> <br></br>for Home & Online Tutions</p>
                 <p>Find the Right Tutor in Your Area</p>
                 <button className="btn btn-primary">Find a TUTOR</button>
             </div>
-            <div className="col"></div>
+         
             <div className="col">
               {/* Use the imported image */}
               <img src={TeacherImage} alt="Teacher" className="animated-image"/>
