@@ -1,0 +1,24 @@
+.home-style{
+    background-image: url('../../assets/images/banner-bg.png');
+    height: 70vh;
+    background-repeat: no-repeat;
+
+    .animated-image {
+        animation: moveUpDown 4s infinite; 
+      }
+
+    
+  
+}
+
+@keyframes moveUpDown {
+    0% {
+      transform: translateY(-30px); // Start position
+    }
+    50% {
+      transform: translateY(30px); // Middle position
+    }
+    100% {
+      transform: translateY(-30px); // End position
+    }
+  }

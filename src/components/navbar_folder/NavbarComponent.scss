@@ -8,6 +8,7 @@
     }
     
     background: linear-gradient(90deg, #540654, #cc0d85 50%, #540654 100%, #00d4ff 0);
+    
     @media only screen and (max-width: 950px){
         .navbar-responsive-control{
             flex-flow: column;
@@ -70,10 +71,7 @@
       .hamburger__line-3.open {
         transform: rotate(45deg) translate(-5px, -6px);
       }
-      
-      .col-7.oepn {
-        transition: all 0.3s ease;
-      }
+  
 
       .hover-effect {
         .col {

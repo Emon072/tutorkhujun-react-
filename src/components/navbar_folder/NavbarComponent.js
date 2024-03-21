@@ -27,7 +27,7 @@ function NavbarComponent() {
               alt="Logo"
             ></img>
           </div>
-          <div className={`col-7 ${isOpen ? "d-none d-md-block" : ""}`}>
+          <div className={`col-7 ${isOpen ? "d-none" : ""}`}>
             <div className="container-sm">
               <div className="row navbar-responsive-control hover-effect">
                 <div className={`col ${activeColumn === 0 ? "active" : ""}`} onClick={() => handleColumnClick(0)}>TUTION JOBS</div>
@@ -37,7 +37,7 @@ function NavbarComponent() {
               </div>
             </div>
           </div>
-          <div className={`col responsive-button-style-nav ${isOpen ? "d-none d-md-block" : ""}`}>
+          <div className={`col responsive-button-style-nav ${isOpen ? "d-none" : ""}`}>
             <button className="btn btn-primary">
               <i className="fa fa-sign-in fa-lg" style={{ marginRight: "5px" }}></i>
               Sign in

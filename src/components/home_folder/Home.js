@@ -1,11 +1,12 @@
 import React from 'react'
 import './Home.scss'
+import HomePart1 from './HomePart1'
 
 function Home() {
   return (
-    <div className="container-fluid home-style">
-      Hello
-    </div>
+    <>
+      < HomePart1/>
+    </>
   )
 }
 
