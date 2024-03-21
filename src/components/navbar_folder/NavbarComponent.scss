@@ -1,0 +1,105 @@
+.navbar-style{
+    position: sticky;
+    top: 0;
+    .row{
+        color: #ffffff;
+        font-size:small;
+        font-weight:900;
+    }
+    
+    background: linear-gradient(90deg, #540654, #cc0d85 50%, #540654 100%, #00d4ff 0);
+    @media only screen and (max-width: 950px){
+        .navbar-responsive-control{
+            flex-flow: column;
+        }
+        button{
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+        .hamburger{
+            display: inline-block !important;
+        }
+        .hover-effect{
+          .col{
+            padding-top: 10px;
+          }
+        }
+    }
+    .btn {
+        margin-left: 5px;
+        background: transparent;
+        padding: 5px 10px; /* Adjust padding as needed */
+        border: 2px solid white; /* Added border style */
+        transition: transform 0.3s; /* Added transition for movement */
+    }
+    
+    .btn:hover,
+    .btn:active {
+        background: transparent;
+        border-color: white;
+        transform: translateY(-5px); /* Move the button up by 5px on hover */
+    }
+    
+    .btn:active {
+        transform: translateY(5px); /* Move the button down by 5px on active */
+    }
+    
+    .hamburger {
+        position: fixed;
+        top: 2px;
+        right: 20px;
+        display: none;
+        // display: inline-block;
+        cursor: pointer;
+        padding: 10px;
+        z-index: 9999; /* Ensure it's on top */
+      }
+      .hamburger__line {
+        width: 30px;
+        height: 3px;
+        background-color: white;
+        margin: 5px 0;
+        transition: all 0.3s ease;
+      }
+      .hamburger__line-1.open {
+        transform: rotate(-45deg) translate(-5px, 6px);
+      }
+      .hamburger__line-2.open {
+        opacity: 0;
+      }
+      .hamburger__line-3.open {
+        transform: rotate(45deg) translate(-5px, -6px);
+      }
+      
+      .col-7.oepn {
+        transition: all 0.3s ease;
+      }
+
+      .hover-effect {
+        .col {
+            position: relative; // Ensure absolute positioning for the underline
+            cursor: pointer;
+
+            &:after {
+                content: "";
+                position: absolute;
+                left: 0;
+                bottom: -3px; // Adjust as needed for the underline position
+                width: 0;
+                height: 2px; // Adjust thickness as needed
+                background-color: white;
+                transition: width 0.5s; // Add transition for animation
+            }
+
+            &:hover::after {
+                width: 90%; // Expand width on hover
+                background-color: aqua;
+            }
+            &.active::after {
+              width: 90%;
+              background-color: aqua;
+            }
+        }
+    }
+}
+
