@@ -6,6 +6,7 @@ function Home() {
   return (
     <>
       < HomePart1/>
+      <div style={{height:'1000px', backgroundColor:'black'}}></div>
     </>
   )
 }

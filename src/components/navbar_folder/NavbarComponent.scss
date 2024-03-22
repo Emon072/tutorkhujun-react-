@@ -1,10 +1,12 @@
 .navbar-style{
     position: sticky;
+    z-index: 10000;
     top: 0;
     .row{
         color: #ffffff;
         font-size:small;
-        font-weight:900;
+        font-weight:800;
+        // font-style: bold;
     }
     
     background: linear-gradient(90deg, #540654, #cc0d85 50%, #540654 100%, #00d4ff 0);
@@ -15,7 +17,7 @@
         }
         button{
             margin-top: 10px;
-            margin-bottom: 10px;
+            
         }
         .hamburger{
             display: inline-block !important;
@@ -32,6 +34,8 @@
         padding: 5px 10px; /* Adjust padding as needed */
         border: 2px solid white; /* Added border style */
         transition: transform 0.3s; /* Added transition for movement */
+        margin-bottom: 5px;
+        margin-top: 5px;
     }
     
     .btn:hover,
@@ -47,12 +51,12 @@
     
     .hamburger {
         position: fixed;
-        top: 2px;
+        top: 13px;
         right: 20px;
         display: none;
         // display: inline-block;
         cursor: pointer;
-        padding: 10px;
+        padding: 0px;
         z-index: 9999; /* Ensure it's on top */
       }
       .hamburger__line {

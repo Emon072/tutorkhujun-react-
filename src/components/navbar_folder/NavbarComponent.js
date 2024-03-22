@@ -22,7 +22,7 @@ function NavbarComponent() {
         >
           <div className="col">
             <img
-              style={{ height: "6vh" }}
+              style={{ height: "58px" }}
               src={require("../../assets/images/logo.webp")}
               alt="Logo"
             ></img>
