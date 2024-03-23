@@ -1,19 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "./NavbarComponent.scss";
 import { Link } from "react-router-dom";
 
 function NavbarComponent({activeLink}) {
   const [isOpen, setIsOpen] = useState(false);
-  const [activeColumn, setActiveColumn] = useState(null);
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
-
-  useEffect(() => {
-    setActiveColumn(activeLink);
-  }, [activeLink])
-  
 
   return (
     <div className="container-fluid navbar-style">
@@ -34,10 +28,10 @@ function NavbarComponent({activeLink}) {
           <div className={`col-7 ${isOpen ? "d-none" : ""}`}>
             <div className="container-sm">
               <div className="row navbar-responsive-control hover-effect">
-                <div className={`col ${activeColumn === 0 ? "active" : ""}`} > <Link to={'/tution-job'}>TUTION JOBS</Link></div>
-                <div className={`col ${activeColumn === 1 ? "active" : ""}`} > <Link to={'/tutor-list'}>PREMIUM TUTORS</Link></div>
-                <div className={`col ${activeColumn === 2 ? "active" : ""}`} > <Link to={'/tutor-list'}>TUTOR REQUEST</Link></div>
-                <div className={`col ${activeColumn === 3 ? "active" : ""}`} > <Link to={'/tutor-list'}>COURSES</Link> </div>
+                <div className={`col ${activeLink === 0 ? "active" : ""}`} > <Link to={'/tution-job'}>TUTION JOBS</Link></div>
+                <div className={`col ${activeLink === 1 ? "active" : ""}`} > <Link to={'/tutor-list'}>PREMIUM TUTORS</Link></div>
+                <div className={`col ${activeLink === 2 ? "active" : ""}`} > <Link to={'/tutor-list'}>TUTOR REQUEST</Link></div>
+                <div className={`col ${activeLink === 3 ? "active" : ""}`} > <Link to={'/tutor-list'}>COURSES</Link> </div>
               </div>
             </div>
           </div>
