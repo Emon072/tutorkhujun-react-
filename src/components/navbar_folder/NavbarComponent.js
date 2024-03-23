@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./NavbarComponent.scss";
+import { Link } from "react-router-dom";
 
-function NavbarComponent() {
+function NavbarComponent({activeLink}) {
   const [isOpen, setIsOpen] = useState(false);
   const [activeColumn, setActiveColumn] = useState(null);
 
@@ -9,9 +10,10 @@ function NavbarComponent() {
     setIsOpen(!isOpen);
   };
 
-  const handleColumnClick = (index) => {
-    setActiveColumn(index === activeColumn ? null : index);
-  };
+  useEffect(() => {
+    setActiveColumn(activeLink);
+  }, [activeLink])
+  
 
   return (
     <div className="container-fluid navbar-style">
@@ -20,20 +22,22 @@ function NavbarComponent() {
           className="row navbar-responsive-control"
           style={{ alignItems: "center" }}
         >
-          <div className="col">
-            <img
-              style={{ height: "58px" }}
-              src={require("../../assets/images/logo.webp")}
-              alt="Logo"
-            ></img>
+          <div className="col" style={{cursor:'pointer'}}>
+            <Link to={'/'}>
+              <img
+                style={{ height: "58px" }}
+                src={require("../../assets/images/logo.webp")}
+                alt="Logo"
+              ></img>
+            </Link>
           </div>
           <div className={`col-7 ${isOpen ? "d-none" : ""}`}>
             <div className="container-sm">
               <div className="row navbar-responsive-control hover-effect">
-                <div className={`col ${activeColumn === 0 ? "active" : ""}`} onClick={() => handleColumnClick(0)}>TUTION JOBS</div>
-                <div className={`col ${activeColumn === 1 ? "active" : ""}`} onClick={() => handleColumnClick(1)}>PREMIUM TUTORS</div>
-                <div className={`col ${activeColumn === 2 ? "active" : ""}`} onClick={() => handleColumnClick(2)}>TUTOR REQUEST</div>
-                <div className={`col ${activeColumn === 3 ? "active" : ""}`} onClick={() => handleColumnClick(3)}>COURSES</div>
+                <div className={`col ${activeColumn === 0 ? "active" : ""}`} > <Link to={'/tution-job'}>TUTION JOBS</Link></div>
+                <div className={`col ${activeColumn === 1 ? "active" : ""}`} > <Link to={'/tutor-list'}>PREMIUM TUTORS</Link></div>
+                <div className={`col ${activeColumn === 2 ? "active" : ""}`} > <Link to={'/tutor-list'}>TUTOR REQUEST</Link></div>
+                <div className={`col ${activeColumn === 3 ? "active" : ""}`} > <Link to={'/tutor-list'}>COURSES</Link> </div>
               </div>
             </div>
           </div>

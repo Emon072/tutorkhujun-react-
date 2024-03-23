@@ -1,0 +1,33 @@
+.subject-slider {
+    padding: 50px 120px;
+    .slick-dots {
+      display: none; /* Hide the point slide indicator */
+    }
+  }
+  
+  .subject-card {
+    font-weight: 600;
+    font-size: 27px;
+    background-color: #F2F6FD; /* Adjust as needed */
+    border: 1px solid #ddd; /* Adjust as needed */
+    border-radius: 10px; /* Adjust as needed */
+    padding: 30px 0px; /* Adjust as needed */
+    margin: 0px; /* Adjust as needed */
+    transition: transform 0.3 ease;
+  }
+
+  .subject-card:hover{
+    transform: translateY(-5px);
+    // transform: translateX(20px);
+    background-color: white;
+    cursor: pointer;
+  }
+  
+  .subject-card-content {
+    text-align: center; /* Adjust as needed */
+  }
+
+  .slick-slide >div{
+    margin: 0 3px;
+  }
+  

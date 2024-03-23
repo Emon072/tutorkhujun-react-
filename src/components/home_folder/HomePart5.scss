@@ -1,0 +1,39 @@
+.home-card-content {
+    border: none;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Adding a border shadow */
+    border-radius: 8px; /* Adding border radius for a rounded appearance */
+    padding: 20px; /* Adding some padding */
+    transition: box-shadow 0.5s ease; /* Adding transition effect for smooth change in box-shadow */
+    cursor: pointer;
+
+    img {
+        height: 300px;
+        width: 100%; /* Ensuring the image fills the container */
+        border-radius: 8px; /* Adding border radius for the image */
+        object-fit: cover; /* Ensuring the image covers the container */
+    }
+    .com-1{
+        font-size: 24px;
+        font-weight: 600;
+        margin: 10px;
+        color: #05264E;
+    }
+    .com-2{
+        font-size: 15px;
+        color: grey;
+        margin-bottom: 10px;
+    }
+    .com-3{
+        font-size: 16px;
+        color: rgb(77, 76, 76);
+    }
+
+    /* Additional components (for demonstration purposes) */
+    background-color: #ffffff; /* Adding a background color */
+    margin-bottom: 20px; /* Adding margin to separate cards */
+}
+
+/* Applying hover effect on the card */
+.home-card-content:hover {
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.5); /* Increasing box-shadow on hover */
+}

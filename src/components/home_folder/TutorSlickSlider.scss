@@ -1,0 +1,121 @@
+.tutor-slider {
+    .slick-dots {
+      display: none; /* Hide the point slide indicator */
+    }
+
+    .tutor-card-view{
+      .for-premium-style {
+        position: relative; /* Add position relative to the parent */
+        height: 180px;
+        margin-top: 10px;
+        
+      }
+      .for-premium-style img{
+        height: 180px;
+        padding: 10px;
+      }
+      
+      .for-premium-style:before {
+        content: "PREMIUM";
+        position: absolute;
+        top: 25px; /* Adjust the position to be on top of the parent */
+        left: -5px; /* Adjust the position as needed */
+        height: fit-content;
+        width: 150px; /* Adjust the width to control the trapezium's shape */
+        // transform: skewX(20deg); /* Adjust the skew angle to create the trapezium */
+        transform: rotate(-45deg);
+        color: white;
+        background: linear-gradient(90deg, #540654, #cc0d85 50%, #540654 100%, #00d4ff 0);
+        padding: 3px 20px;
+        clip-path: polygon(0% 100%, 100% 100%, 80% 0%, 20% 0%);
+    }
+    
+      .teacher-name{
+          font-size: 20px;
+          font-weight: 600;
+          white-space: nowrap; /* Prevent text wrapping */
+          overflow: hidden; /* Hide overflowing text */
+          text-overflow: ellipsis; /* Display ellipsis for overflowing text */
+      }
+      .teacher-university {
+          font-size: 15px;
+          color: grey;
+          white-space: nowrap; /* Prevent text wrapping */
+          overflow: hidden; /* Hide overflowing text */
+          text-overflow: ellipsis; /* Display ellipsis for overflowing text */
+      }
+      .teacher-subject{
+          font-weight: 600;
+          font-size: 16px;
+          white-space: nowrap; /* Prevent text wrapping */
+          overflow: hidden; /* Hide overflowing text */
+          text-overflow: ellipsis; /* Display ellipsis for overflowing text */
+      }
+      .place-style{
+          margin: 10px 60px;
+          padding: 4px 4px;
+          border-radius: 5px;
+          font-size: 13px;
+          color: rgb(49, 197, 235);
+          border: 2px solid rgb(49, 197, 235);
+      }
+
+      .gradient_bg {
+          background: linear-gradient(90deg, #540654, #cc0d85 50%, #540654 100%, #00d4ff 0);
+      }
+      .text-light {
+          color: #f8f9fa !important;
+      }
+      .btn-1:before {
+        content: "";
+        position: absolute;
+        height: 150px;
+        width: 50px;
+        background: #ffffff;
+        left: -55px;
+        top: -40px;
+        transform: rotate(37deg);
+        transition: all 0.3s ease; /* Specify the timing function */
+        opacity: 0.3; /* The correct value for opacity */
+        box-sizing: border-box;
+      }
+    
+      .btn:hover::before {
+        left: 180px;
+      }
+
+      .btn-1 {
+          padding: 7px 60px;
+          margin-bottom: 20px;
+          text-align: center;
+          display: inline-block;
+          border: 1px solid #fff;
+          cursor: pointer;
+          position: relative;
+          overflow: hidden;
+      }
+      
+      
+    }
+    .slick-slide >div{
+      margin: 0 7px;
+    }
+  }
+  
+  .tutor-card {
+    color: #6C2A8C;
+    font-weight: 600;
+    font-size: 14px;
+    background-color: #ffffff; /* Adjust as needed */
+    border: 1px solid #ddd; /* Adjust as needed */
+    border-radius: 15px; /* Adjust as needed */
+    padding-top: 10px; /* Adjust as needed */
+    margin: 0px; /* Adjust as needed */
+  }
+  
+  .tutor-card-content {
+    text-align: center; /* Adjust as needed */
+  }
+
+  
+  

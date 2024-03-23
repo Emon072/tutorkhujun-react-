@@ -103,5 +103,15 @@
             }
         }
     }
+    a {
+      color: inherit; /* Use the same color as the parent element */
+      text-decoration: none; /* Remove underline */
+      cursor: pointer; /* Change cursor to pointer on hover */
+  }
+
+  /* Optional: Add styles for hover state */
+    a:hover {
+        text-decoration: none; /* Add underline on hover */
+    }
 }
 

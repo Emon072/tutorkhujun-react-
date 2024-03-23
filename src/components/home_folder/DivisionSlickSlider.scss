@@ -1,0 +1,25 @@
+.division-slider {
+    .slick-dots {
+      display: none; /* Hide the point slide indicator */
+    }
+  }
+  
+  .division-card {
+    color: #6C2A8C;
+    font-weight: 600;
+    font-size: 14px;
+    background-color: #ffffff; /* Adjust as needed */
+    border: 1px solid #ddd; /* Adjust as needed */
+    border-radius: 50px; /* Adjust as needed */
+    padding: 5px; /* Adjust as needed */
+    margin: 0px; /* Adjust as needed */
+  }
+  
+  .division-card-content {
+    text-align: center; /* Adjust as needed */
+  }
+
+  .slick-slide >div{
+    margin: 0 3px;
+  }
+  
