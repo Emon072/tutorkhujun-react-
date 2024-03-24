@@ -31,7 +31,7 @@ function NavbarComponent({activeLink}) {
                 <div className={`col ${activeLink === 0 ? "active" : ""}`} > <Link to={'/tution-job'}>TUTION JOBS</Link></div>
                 <div className={`col ${activeLink === 1 ? "active" : ""}`} > <Link to={'/tutor-list'}>PREMIUM TUTORS</Link></div>
                 <div className={`col ${activeLink === 2 ? "active" : ""}`} > <Link to={'/tutor-request'}>TUTOR REQUEST</Link></div>
-                <div className={`col ${activeLink === 3 ? "active" : ""}`} > <Link to={'/tutor-list'}>COURSES</Link> </div>
+                <div className={`col ${activeLink === 3 ? "active" : ""}`} > <Link to={'/courses'}>COURSES</Link> </div>
               </div>
             </div>
           </div>

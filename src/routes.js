@@ -3,6 +3,7 @@ import App from './App'
 import TutionJob from "./components/tutionJob_folder/TutionJob";
 import PremiumTutor from "./components/premiumTutor_folder/PremiumTutor";
 import TutorRequest from "./components/tutor_request_folder/TutorRequest";
+import CoursesMain from "./components/courses_folder/CoursesMain";
 
 export const routes = createBrowserRouter([
     {
@@ -20,5 +21,9 @@ export const routes = createBrowserRouter([
     {
         path: "/tutor-request",
         element: <TutorRequest activeLink= {2}/>,
+    },
+    {
+        path: "/courses",
+        element: <CoursesMain activeLink= {3}/>,
     },
 ]);

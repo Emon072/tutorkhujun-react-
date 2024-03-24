@@ -1,0 +1,16 @@
+.container-style-course {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 90vh;
+
+    .card-view{
+        padding: 100px 100px;
+        background-color: rgb(231, 253, 253);
+        font-size: 40px;
+        font-weight: 600;
+        border-radius: 20px;
+        box-sizing: border-box;
+        box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.1);
+    }
+  }
