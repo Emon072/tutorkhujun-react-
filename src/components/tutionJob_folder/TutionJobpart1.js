@@ -5,12 +5,16 @@ import MediumInfoArr from "../../assets/mockDataset/MediumInfo";
 
 function TutionJobpart1() {
   const [selectedLocation, setSelectedLocation] = useState("all");
+  const [selectGender, setselectGender] = useState("all-gender")
   const [seletedArea, setseletedArea] = useState([]);
   const [selectedClasses, setselectedClasses] = useState([]);
 
   const handleLocationClick = (event) => {
     setSelectedLocation(event.target.value);
   };
+  const handleGenderSelect = (event) =>{
+    setselectGender(event.target.value);
+  }
   const handleDivisionClick = (event) => {
     if (event.target.value!=='all')
         setseletedArea(DistrictInfoArr[event.target.value].area);
@@ -37,7 +41,7 @@ function TutionJobpart1() {
             <input
               type="radio"
               value="all"
-              name="radio"
+              name="all"
               onClick={handleLocationClick}
               checked={selectedLocation === "all"}
             />
@@ -48,7 +52,7 @@ function TutionJobpart1() {
             <p>Home Tution</p>
             <input
               type="radio"
-              name="radio"
+              name="home"
               value="home"
               onClick={handleLocationClick}
               checked={selectedLocation === "home"}
@@ -60,7 +64,7 @@ function TutionJobpart1() {
             <p>Online Tution</p>
             <input
               type="radio"
-              name="radio"
+              name="online"
               value="online"
               onClick={handleLocationClick}
               checked={selectedLocation === "online"}
@@ -86,10 +90,10 @@ function TutionJobpart1() {
             <p>All</p>
             <input
               type="radio"
-              value="all"
-              name="radio"
-              onClick={handleLocationClick}
-              checked={selectedLocation === "all"}
+              value="all-gender"
+              name="all-gender"
+              onClick={handleGenderSelect}
+              checked={selectGender === "all-gender"}
             />
             <span className="checkmark"></span>
           </label>
@@ -98,10 +102,10 @@ function TutionJobpart1() {
             <p>Male</p>
             <input
               type="radio"
-              name="radio"
-              value="home"
-              onClick={handleLocationClick}
-              checked={selectedLocation === "home"}
+              name="male"
+              value="male"
+              onClick={handleGenderSelect}
+              checked={selectGender === "male"}
             />
             <span className="checkmark"></span>
           </label>
@@ -110,10 +114,10 @@ function TutionJobpart1() {
             <p>Female</p>
             <input
               type="radio"
-              name="radio"
-              value="online"
-              onClick={handleLocationClick}
-              checked={selectedLocation === "online"}
+              name="female"
+              value="female"
+              onClick={handleGenderSelect}
+              checked={selectGender === "female"}
             />
             <span className="checkmark"></span>
           </label>

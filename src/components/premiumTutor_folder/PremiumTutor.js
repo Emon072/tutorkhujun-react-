@@ -1,7 +1,8 @@
 import React from 'react'
 import './PremiumTutor.scss'
 import NavbarComponent from '../navbar_folder/NavbarComponent'
-import TutionJobpart1 from '../tutionJob_folder/TutionJobpart1'
+import PremiumTutorPart1 from './PremiumTutorPart1'
+import PremiumTutorPart2 from './PremiumTutorPart2'
 
 function PremiumTutor(props) {
   return (
@@ -9,8 +10,8 @@ function PremiumTutor(props) {
       <NavbarComponent activeLink={props.activeLink}></NavbarComponent>
       <div className='container' style={{marginBottom:'100px'}}>
         <div className='row' style={{margin:'0px 15px'}}>
-            <div className='col-3' ><TutionJobpart1/></div>
-            {/* <div className='col-9' ><TutionJobPart2/></div> */}
+            <div className='col-3' ><PremiumTutorPart1/></div>
+            <div className='col-9' ><PremiumTutorPart2/></div>
         </div>
       </div>
     </>
