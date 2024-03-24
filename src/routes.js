@@ -2,6 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import App from './App'
 import TutionJob from "./components/tutionJob_folder/TutionJob";
 import PremiumTutor from "./components/premiumTutor_folder/PremiumTutor";
+import TutorRequest from "./components/tutor_request_folder/TutorRequest";
 
 export const routes = createBrowserRouter([
     {
@@ -15,5 +16,9 @@ export const routes = createBrowserRouter([
     {
         path: "/tutor-list",
         element: <PremiumTutor activeLink= {1}/>,
+    },
+    {
+        path: "/tutor-request",
+        element: <TutorRequest activeLink= {2}/>,
     },
 ]);
