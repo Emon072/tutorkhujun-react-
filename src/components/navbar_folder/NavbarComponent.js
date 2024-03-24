@@ -36,14 +36,19 @@ function NavbarComponent({activeLink}) {
             </div>
           </div>
           <div className={`col responsive-button-style-nav ${isOpen ? "d-none" : ""}`}>
-            <button className="btn btn-primary">
-              <i className="fa fa-sign-in fa-lg" style={{ marginRight: "5px" }}></i>
-              Sign in
-            </button>
-            <button className="btn btn-primary">
-              <i className="fa fa-sign-in fa-lg" style={{ marginRight: "4px" }}></i>{" "}
-              Sign up
-            </button>
+            <Link to={'/login'}>
+              <button className="btn btn-primary">
+                <i className="fa fa-sign-in fa-lg" style={{ marginRight: "5px" }}></i>
+                Sign in
+              </button>
+            </Link>
+           <Link to={'/register'}>
+              <button className="btn btn-primary">
+                <i className="fa fa-sign-in fa-lg" style={{ marginRight: "4px" }}></i>{" "}
+                Sign up
+              </button>
+           </Link>
+            
           </div>
         </div>
 

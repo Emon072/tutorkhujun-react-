@@ -4,6 +4,8 @@ import TutionJob from "./components/tutionJob_folder/TutionJob";
 import PremiumTutor from "./components/premiumTutor_folder/PremiumTutor";
 import TutorRequest from "./components/tutor_request_folder/TutorRequest";
 import CoursesMain from "./components/courses_folder/CoursesMain";
+import LoginComponent from "./components/login_folder/LoginComponent";
+import RegisterComponent from "./components/register_folder/RegisterComponent";
 
 export const routes = createBrowserRouter([
     {
@@ -25,5 +27,13 @@ export const routes = createBrowserRouter([
     {
         path: "/courses",
         element: <CoursesMain activeLink= {3}/>,
+    },
+    {
+        path: "/login",
+        element: <LoginComponent activeLink={5}/>,
+    },
+    {
+        path: "/register",
+        element: <RegisterComponent activeLink={5}/>,
     },
 ]);
