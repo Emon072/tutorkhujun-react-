@@ -1,6 +1,7 @@
 import React, { useState  } from 'react'
 import './RegisterComponentTutor.scss'
 import { DistrictInfoArr } from "../../assets/mockDataset/DistrictInfo";
+import Swal from 'sweetalert2'
 
 function RegisterComponentTutor() {
 
@@ -9,13 +10,13 @@ function RegisterComponentTutor() {
   const handleDivisionClick = (event) => {
     if (event.target.value !== ""){
       setseletedArea(DistrictInfoArr[event.target.value].area);
-      settutorPrimaryInfo({...tutorPrimaryInfo , tutionDistrict : event.target.value});
+      settutorPrimaryInfo({...tutorPrimaryInfo , tutionDistrict : DistrictInfoArr[event.target.value].district});
     }
       
   };
   const handleAreaClick = (event) => {
     if (event.target.value!=="")
-      settutorPrimaryInfo({...tutorPrimaryInfo , tutionLocation: event.target.value});
+      settutorPrimaryInfo({...tutorPrimaryInfo , tutionLocation: seletedArea[event.target.value]});
   };
 
   // ------------------------------------ this section is for registering a new tutor in the database -------------------------------
@@ -72,8 +73,24 @@ function RegisterComponentTutor() {
 
   const registerNewTutor = (event)=>{
     event.preventDefault();
-    // console.log(tutorLoginInfo);
-    // console.log(tutorPrimaryInfo);
+    if (tutorLoginInfo.password!==rePassword){
+      Swal.fire({
+        title: "Password Does not matches",
+        text: "You enter the wrong password",
+        icon: "error"
+      });
+      return;
+    }
+    if (!tutorLoginInfo.phone.length || !tutorLoginInfo.password.length || !tutorPrimaryInfo.name.length || !tutorPrimaryInfo.email.length || !tutorPrimaryInfo.gender.length || !tutorPrimaryInfo.tutionLocation.length || !tutorPrimaryInfo.tutionDistrict.length ){
+      Swal.fire({
+        title: "Input Field Empty",
+        text: "Please Enter all the value",
+        icon: "error"
+      });
+      return;
+    }
+    // --------------------- now checking the user phone number is valid if valid then create new user ------------------------------------
+    
   }
 
 
