@@ -57,11 +57,11 @@ function LoginComponent(props) {
 
                 <div className="input-style-login" style={{textAlign: 'start'}}>
                   <div class="form-group">
-                      <label htmlFor="exampleInputEmail1">Phone Number</label>
+                      <label htmlFor="exampleInputEmail1">Phone Number<span style={{color:'red'}}> *</span></label>
                       <input type="number" class="form-control" id="exampleInputPhone" aria-describedby="numberHelp" placeholder="Enter phone number"/>
                   </div>
                   <div class="form-group">
-                      <label htmlFor="exampleInputEmail1">Password</label>
+                      <label htmlFor="exampleInputEmail1">Password<span style={{color:'red'}}> *</span></label>
                       <input type="password" class="form-control" id="exampleInputpassword" aria-describedby="passwordHelp" placeholder="Enter password"/>
                   </div>
                 </div>
