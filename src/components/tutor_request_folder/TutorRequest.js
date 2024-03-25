@@ -5,6 +5,7 @@ import { DistrictInfoArr } from '../../assets/mockDataset/DistrictInfo';
 import MediumInfoArr from "../../assets/mockDataset/MediumInfo";
 
 function TutorRequest(props) {
+
     const [seletedArea, setseletedArea] = useState([]);
     const [selectedClasses, setselectedClasses] = useState([]);
 

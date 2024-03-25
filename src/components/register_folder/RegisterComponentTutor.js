@@ -1,26 +1,93 @@
-import React, { useState } from 'react'
+import React, { useState  } from 'react'
 import './RegisterComponentTutor.scss'
 import { DistrictInfoArr } from "../../assets/mockDataset/DistrictInfo";
 
 function RegisterComponentTutor() {
 
   const [seletedArea, setseletedArea] = useState([]);
+  const [rePassword, setrePassword] = useState("");
   const handleDivisionClick = (event) => {
-    if (event.target.value !== "")
+    if (event.target.value !== ""){
       setseletedArea(DistrictInfoArr[event.target.value].area);
+      settutorPrimaryInfo({...tutorPrimaryInfo , tutionDistrict : event.target.value});
+    }
+      
   };
-  const handleAreaClick = (event) => { };
+  const handleAreaClick = (event) => {
+    if (event.target.value!=="")
+      settutorPrimaryInfo({...tutorPrimaryInfo , tutionLocation: event.target.value});
+  };
+
+  // ------------------------------------ this section is for registering a new tutor in the database -------------------------------
+  const [tutorLoginInfo, settutorLoginInfo] = useState({
+    id : "",
+    phone : "",
+    password : ""
+  });
+  const [tutorPrimaryInfo, settutorPrimaryInfo] = useState({
+    id : "",
+    tutorName : "",
+    gender : "",
+    email : "",
+    phone : "",
+    tutionDistrict : "",
+    tutionLocation : "",
+    profilePicture : "",
+    varsity : "",
+    subject : "",
+    Medium : "",
+    classes : [],
+    tutionType : "",
+    isPremium : ""
+ })
+  
+
+  const onChangeHandler = (e) =>{
+    switch (e.target.name) {
+      case "name":
+        settutorPrimaryInfo({...tutorPrimaryInfo, tutorName : e.target.value});
+        break;
+      case "genderSelect":
+        settutorPrimaryInfo({...tutorPrimaryInfo, gender: e.target.value});
+        break;
+      case "emailInput":
+        // alert('i am clicked')
+        settutorPrimaryInfo({...tutorPrimaryInfo , email: e.target.value});
+        break;
+      case "phone":
+        settutorPrimaryInfo({...tutorPrimaryInfo , phone: e.target.value});
+        settutorLoginInfo({...tutorLoginInfo , phone: e.target.value});
+        break;
+      case "password":
+        settutorLoginInfo({...tutorLoginInfo, password: e.target.value});
+        break;
+      case "re-password":
+        setrePassword(e.target.value);
+        break;
+      default:
+        break;
+    }
+  }
+  
+
+  const registerNewTutor = (event)=>{
+    event.preventDefault();
+    // console.log(tutorLoginInfo);
+    // console.log(tutorPrimaryInfo);
+  }
+
+
   return (
     <>
       <div className='container register-input-style'>
         <div className='row' style={{ textAlign: 'start' }}>
           <div class="col form-group" >
             <label htmlFor="exampleInputName" >Name<span style={{ color: 'red' }}> *</span></label>
-            <input type="text" class="form-control" id="exampleInputName" aria-describedby="numberHelp" placeholder="Name..." />
+            <input name="name" value={tutorLoginInfo.name} onChange={onChangeHandler} type="text" class="form-control" id="exampleInputName" aria-describedby="numberHelp" placeholder="Name..." />
           </div>
           <div className='col'>
             <label htmlFor="exampleInputGender" >Gender<span style={{ color: 'red' }}> *</span></label>
-            <select class="form-select" id='exampleInputGender'>
+            <select class="form-select" onChange={onChangeHandler} name="genderSelect" id='exampleInputGender'>
               <option selected value={""}>Choose Gender</option>
               <option value={"Male"}>Male</option>
               <option value={"Female"}>Female</option>
@@ -31,11 +98,11 @@ function RegisterComponentTutor() {
         <div className='row' style={{ textAlign: 'start' }}>
           <div class="col form-group" >
             <label htmlFor="exampleInputEmail1" >Email<span style={{ color: 'red' }}> *</span></label>
-            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="ex: user@gmail.com" />
+            <input name="emailInput" value={tutorPrimaryInfo.email} onChange={onChangeHandler} type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="ex: user@gmail.com" />
           </div>
           <div class="col form-group">
             <label htmlFor="exampleInputPhone">Phone<span style={{ color: 'red' }}> *</span></label>
-            <input type="number" class="form-control" id="exampleInputPhone" aria-describedby="numberHelp" placeholder="ex: 01......" />
+            <input name="phone" value={tutorPrimaryInfo.phone} onChange={onChangeHandler} type="number" class="form-control" id="exampleInputPhone" aria-describedby="numberHelp" placeholder="ex: 01......" />
           </div>
         </div>
         <div className='row' style={{ textAlign: 'start' }}>
@@ -75,11 +142,11 @@ function RegisterComponentTutor() {
         <div className='row' style={{ textAlign: 'start' }}>
           <div class="col form-group" >
             <label htmlFor="exampleInputPassword1" >Password<span style={{ color: 'red' }}> *</span></label>
-            <input type="password" class="form-control" id="exampleInputPassword1" aria-describedby="numberHelp" placeholder="Password" />
+            <input name="password" value={tutorLoginInfo.password} onChange={onChangeHandler} type="password" class="form-control" id="exampleInputPassword1" aria-describedby="numberHelp" placeholder="Password" />
           </div>
           <div class="col form-group">
             <label htmlFor="exampleInputPassword2">Re-Password<span style={{ color: 'red' }}> *</span></label>
-            <input type="password" class="form-control" id="exampleInputPassword2" aria-describedby="passwordHelp" placeholder="Re-enter Password" />
+            <input name="re-password" value={rePassword} type="password" onChange={onChangeHandler} class="form-control" id="exampleInputPassword2" aria-describedby="passwordHelp" placeholder="Re-enter Password" />
           </div>
         </div>
 
@@ -87,7 +154,7 @@ function RegisterComponentTutor() {
 
 
 
-      <button className="btn btn-1 gradient_bg text-light">Register as Teacher</button>
+      <button className="btn btn-1 gradient_bg text-light" onClick={registerNewTutor}>Register as Teacher</button>
     </>
 
   )

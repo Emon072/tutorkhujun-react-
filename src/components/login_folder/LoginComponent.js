@@ -10,6 +10,12 @@ function LoginComponent(props) {
     setsetLoginType(event.target.value);
     // console.log(event.type.value);
   };
+
+  // --------------------------- this section is for sign in a tutor ----------------------------------------
+  // const registerNewTutor = ()=>{
+
+  // }
+
   return (
     <div>
       <NavbarComponent activeLink={5}></NavbarComponent>
