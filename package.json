@@ -19,6 +19,7 @@
     "sass": "^1.72.0",
     "slick-carousel": "^1.8.1",
     "sweetalert2": "^11.10.7",
+    "uid": "^2.0.2",
     "web-vitals": "^2.1.4",
     "zustand": "^4.5.2"
   },

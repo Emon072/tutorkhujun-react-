@@ -2,7 +2,7 @@ import React, { useState  } from 'react'
 import './RegisterComponentTutor.scss'
 import { DistrictInfoArr } from "../../assets/mockDataset/DistrictInfo";
 import Swal from 'sweetalert2'
-import { registerNewTutor } from '../../api/tutor_api/registerTutorApi';
+import { registerNewTutorLogin } from '../../api/tutor_api/registerTutorApi';
 
 function RegisterComponentTutor() {
 
@@ -71,6 +71,18 @@ function RegisterComponentTutor() {
     }
   }
   
+  const registerTutorHere = async () =>{
+    try{
+      const tutor = await registerNewTutorLogin(tutorLoginInfo);
+      console.log(tutor);
+    }catch(error){
+      Swal.fire({
+        title: "Operation Unsuccessful",
+        text: "Can not added because of " + error,
+        icon: "error"
+      });
+    };
+  }
 
   const NewTutor = (event)=>{
     event.preventDefault();
@@ -82,17 +94,8 @@ function RegisterComponentTutor() {
       });
       return;
     }
-    // console.log(tutorLoginInfo)
-    // if (!tutorLoginInfo.phone.length || !tutorLoginInfo.password.length || !tutorPrimaryInfo.name.length || !tutorPrimaryInfo.email.length || !tutorPrimaryInfo.gender.length || !tutorPrimaryInfo.tutionLocation.length || !tutorPrimaryInfo.tutionDistrict.length ){
-    //   Swal.fire({
-    //     title: "Input Field Empty",
-    //     text: "Please Enter all the value",
-    //     icon: "error"
-    //   });
-    //   return;
-    // }
     // --------------------- now checking the user phone number is valid if valid then create new user ------------------------------------
-    console.log(registerNewTutor(tutorLoginInfo));
+    registerTutorHere();
   }
 
 
