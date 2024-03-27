@@ -111,8 +111,8 @@ function TutorRequest(props) {
                         </div>
                     </div>
                 </div>
-                <div className='col text-center d-flex align-items-center justify-content-center' style={{flexFlow:'column'}}>
-                    <div className='card-view'>
+                <div className='col text-center d-flex align-items-center justify-content-center' >
+                    <div className='card-view' style={{flexFlow:'column', padding:'20px'}}>
                         <div className='title-1'>HELP & INFO</div>
                         <div className='title-2'>Q. If i cant get the desired tutor ?</div>
                         <div className='title-3'>Just fill up the request tutor form and send us. We will try to find your desired tutor.</div>

@@ -16,7 +16,7 @@ const addMockTutor = (requestConfig) => {
         tutor = {...tutor , id: `TS-${tutorInfo.length + 1}`};
         tutorInfo.push(tutor);
         write_database("tutor-loginInfo", tutorInfo);
-        const sendResponse = {token : uid(), id : tutor.id}
+        const sendResponse = {token : uid(), id : tutor.id};
         tokenInfoTutor.push(sendResponse);
         write_database("token-info-tutor", tokenInfoTutor);
         

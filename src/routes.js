@@ -6,7 +6,7 @@ import TutorRequest from "./components/tutor_request_folder/TutorRequest";
 import CoursesMain from "./components/courses_folder/CoursesMain";
 import LoginComponent from "./components/login_folder/LoginComponent";
 import RegisterComponent from "./components/register_folder/RegisterComponent";
-import TutorProfile from "./components/profile_folder/tutor_profile_folder/TutorProfile";
+import TutorUpdateProfile from "./components/profile_folder/tutor_profile_folder/tutorUpdateProfileComponent/TutorUpdateProfile";
 
 export const routes = createBrowserRouter([
     {
@@ -38,7 +38,7 @@ export const routes = createBrowserRouter([
         element: <RegisterComponent activeLink={5}/>,
     },
     {
-        path: "/t-profile",
-        element: <TutorProfile activeLink={5}/>,
+        path: "/t-profile/update",
+        element: <TutorUpdateProfile dashboard = {3} activeLink={5}/>,
     },
 ]);

@@ -1,0 +1,40 @@
+.education{
+    padding-top: 20px;
+    .title-1{
+        font-size: 25px;
+        font-weight: 600;
+        color: #05264E;
+    }
+    .line{
+        height: 2px;
+        width: 16%;
+        background-color: #8B096A;
+    }
+    .title-2{
+        margin-top: 15px;
+        color: gray;
+    }
+    .card{
+        margin-top: 10px;
+        padding: 15px;
+        box-sizing: border-box;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        .title-1{
+            font-size: 18px;
+            font-weight: 600;
+            color: #05264E;
+            margin-bottom: 20px;
+        }
+        .input-field-style{
+            color: #05264E;
+            margin: 10px;
+        }
+        input{
+            width: 100%;
+            padding: 3px 10px 3px 10px;
+            // color: gray;
+            // border-color: gray !important;
+            border: 1px solid gray;
+        }
+    }
+}

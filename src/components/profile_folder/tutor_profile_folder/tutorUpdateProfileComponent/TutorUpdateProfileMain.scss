@@ -1,0 +1,33 @@
+.update-main{
+    
+    .main-card{
+        box-sizing: border-box;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        margin: 5px;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: transform 0.4 ease-out;
+        
+        img{
+            height: 55px;
+            width: auto;
+            // object-fit: contain;
+        }
+        
+        p{
+            padding-top: 5px;
+            font-weight: 600;
+            
+        }
+        
+    }
+    .main-card:hover{
+        color: purple;
+        transform: translateY(3px);
+    }
+    .active{
+        border: 2px solid purple;
+        color: purple;
+    }
+
+}
