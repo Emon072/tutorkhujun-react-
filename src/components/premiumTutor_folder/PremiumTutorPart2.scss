@@ -1,4 +1,5 @@
 .premium-part-2{
+  // width: 500px;
   .line{
     height: 1px;
     margin-top: 10px;
@@ -23,8 +24,10 @@
           
         }
         .for-premium-style img{
-          height: 180px;
-          padding: 10px;
+          // object-fit: cover;
+          width: 70%;
+          height: auto;
+          // padding: 10px;
         }
         
         .for-premium-style:before {

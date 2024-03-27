@@ -8,10 +8,10 @@ function PremiumTutor(props) {
   return (
     <>
       <NavbarComponent activeLink={props.activeLink}></NavbarComponent>
-      <div className='container' style={{marginBottom:'100px'}}>
+      <div className='container-xl' style={{marginBottom:'100px'}}>
         <div className='row' style={{margin:'0px 15px'}}>
             <div className='col-3' ><PremiumTutorPart1/></div>
-            <div className='col-9' ><PremiumTutorPart2/></div>
+            <div className='col-9'  ><PremiumTutorPart2/></div>
         </div>
       </div>
     </>

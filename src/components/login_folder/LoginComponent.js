@@ -2,19 +2,61 @@ import React, { useState } from "react";
 import NavbarComponent from "../navbar_folder/NavbarComponent";
 import "./LoginComponent.scss";
 import loginSvg from "../../assets/images/Computer login-amico.58fc4aa2.svg";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { tutorLogin } from "../../api/tutor_api/registerTutorApi";
+import Swal from 'sweetalert2'
 
 function LoginComponent(props) {
-  const [setLoginType, setsetLoginType] = useState("student");
+  const [setLoginType, setsetLoginType] = useState("tutor");
+  const [phoneNumber, setphoneNumber] = useState();
+  const [password, setpassword] = useState("");
+  const navigate = useNavigate();
+
   const handleLoginType = (event) => {
     setsetLoginType(event.target.value);
     // console.log(event.type.value);
   };
 
   // --------------------------- this section is for sign in a tutor ----------------------------------------
-  // const registerNewTutor = ()=>{
+  const tutorLoginControl = async (phoneNumber , password) =>{
+    try {
+      const response = await tutorLogin(phoneNumber , password);
+      // console.log(response.token);
+      localStorage.getItem("token" , response.token);
+      Swal.fire({
+        title: "Login successfully",
+        icon: "success"
+      });
+      navigate('/t-profile');
+    } catch (error) {
+      Swal.fire({
+        title: "Operation Unsuccessful",
+        text: "Can not added because of " + error,
+        icon: "error"
+      });
+    }
+  }
+  const handleLogin = ()=>{
+    if (setLoginType==="tutor"){
+      tutorLoginControl(phoneNumber , password);
+    }
+    else{
+      // login logic for student
+    }
+  }
 
-  // }
+  const handleOnClick =(e) =>{
+    switch (e.target.name) {
+      case "phone":
+        setphoneNumber(e.target.value);
+        break;
+      case "password":
+        setpassword(e.target.value);
+        break;
+      default:
+        break;
+    }
+  }
 
   return (
     <div>
@@ -34,7 +76,7 @@ function LoginComponent(props) {
                   <div className="col custom-radio-button">
                     <label className="container">
                       {" "}
-                      <p>Student</p>
+                      <p style={{marginLeft:""}}>Student</p>
                       <input
                         type="radio"
                         value="student"
@@ -48,7 +90,7 @@ function LoginComponent(props) {
                   <div className="col custom-radio-button">
                     <label className="container">
                       {" "}
-                      <p style={{ marginLeft: "-25px" }}>Tutor</p>
+                      <p style={{ marginLeft: "-20px" }}>Tutor</p>
                       <input
                         type="radio"
                         value="tutor"
@@ -63,16 +105,16 @@ function LoginComponent(props) {
 
                 <div className="input-style-login" style={{textAlign: 'start'}}>
                   <div class="form-group">
-                      <label htmlFor="exampleInputEmail1">Phone Number<span style={{color:'red'}}> *</span></label>
-                      <input type="number" class="form-control" id="exampleInputPhone" aria-describedby="numberHelp" placeholder="Enter phone number"/>
+                      <label htmlFor="exampleInputPhone">Phone Number<span style={{color:'red'}}> *</span></label>
+                      <input onChange={handleOnClick} name="phone" value={phoneNumber} type="number" class="form-control" id="exampleInputPhone" aria-describedby="numberHelp" placeholder="Enter phone number"/>
                   </div>
                   <div class="form-group">
-                      <label htmlFor="exampleInputEmail1">Password<span style={{color:'red'}}> *</span></label>
-                      <input type="password" class="form-control" id="exampleInputpassword" aria-describedby="passwordHelp" placeholder="Enter password"/>
+                      <label htmlFor="exampleInputPassword">Password<span style={{color:'red'}}> *</span></label>
+                      <input onChange={handleOnClick} name="password" value={password} type="password" class="form-control" id="exampleInputpassword" aria-describedby="passwordHelp" placeholder="Enter password"/>
                   </div>
                 </div>
 
-                <button className="btn btn-1 gradient_bg text-light">Login</button>
+                <button className="btn btn-1 gradient_bg text-light" onClick={handleLogin}>Login</button>
                 <div className="go-to-register-style"><Link to={'/register'}>Click here to Register</Link></div>
               
               </div>

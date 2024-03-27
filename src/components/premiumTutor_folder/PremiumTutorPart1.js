@@ -36,7 +36,7 @@ function PremiumTutorPart1() {
   
         <div className="title-2">Tutor type</div>
         <div className="row">
-          <div className="col-9 custom-radio-button">
+          <div className="col-8 custom-radio-button">
 
             <label className="container">
               {" "}
@@ -76,7 +76,7 @@ function PremiumTutorPart1() {
   
         <div className="title-2">Gender</div>
         <div className="row">
-          <div className="col-9 custom-radio-button">
+          <div className="col-8 custom-radio-button">
             <label className="container">
               {" "}
               <p>All</p>

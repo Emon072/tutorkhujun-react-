@@ -2,12 +2,14 @@ import React, { useState  } from 'react'
 import './RegisterComponentTutor.scss'
 import { DistrictInfoArr } from "../../assets/mockDataset/DistrictInfo";
 import Swal from 'sweetalert2'
-import { registerNewTutorLogin } from '../../api/tutor_api/registerTutorApi';
+import { registerNewTutorLogin, registerNewTutorPrimaryInfo } from '../../api/tutor_api/registerTutorApi';
+import { useNavigate } from 'react-router-dom';
 
 function RegisterComponentTutor() {
 
   const [seletedArea, setseletedArea] = useState([]);
   const [rePassword, setrePassword] = useState("");
+  const navigate = useNavigate();
   const handleDivisionClick = (event) => {
     if (event.target.value !== ""){
       setseletedArea(DistrictInfoArr[event.target.value].area);
@@ -70,11 +72,32 @@ function RegisterComponentTutor() {
         break;
     }
   }
+
+  const registerTutorPrimaryInfo = async(tutorInfo) =>{
+    try{
+      await registerNewTutorPrimaryInfo(tutorInfo);
+    
+      Swal.fire({
+        title: "Registration successfull",
+        icon: "success"
+      });
+      navigate('/t-profile');
+    } catch(error){
+      Swal.fire({
+        title: "Operation Unsuccessful",
+        text: "Can not added because of " + error,
+        icon: "error"
+      });
+    }
+  }
   
   const registerTutorHere = async () =>{
     try{
+      // localStorage.clear();
       const tutor = await registerNewTutorLogin(tutorLoginInfo);
-      console.log(tutor);
+      localStorage.setItem("token", tutor.token);
+      settutorPrimaryInfo({...tutorPrimaryInfo , id : tutor.id, profilePicture : "https://png.pngtree.com/png-vector/20220709/ourmid/pngtree-businessman-user-avatar-wearing-suit-with-red-tie-png-image_5809521.png"});
+      registerTutorPrimaryInfo({...tutorPrimaryInfo , id : tutor.id, profilePicture : "https://png.pngtree.com/png-vector/20220709/ourmid/pngtree-businessman-user-avatar-wearing-suit-with-red-tie-png-image_5809521.png"});
     }catch(error){
       Swal.fire({
         title: "Operation Unsuccessful",
