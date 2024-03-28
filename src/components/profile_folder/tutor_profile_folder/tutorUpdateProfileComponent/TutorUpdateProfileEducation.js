@@ -1,8 +1,14 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import './TutorUpdateProfileEducation.scss'
+import { GetTutorEducationInfo, PostTutorEducationInfo, PutTutorEducationInfo } from '../../../../api/tutor_api/TutorEducationInfo';
+import { getTutorPrimaryInfo } from '../../../../api/tutor_api/registerTutorApi';
+import Swal from 'sweetalert2';
+import { useNavigate } from 'react-router-dom';
 
 function TutorUpdateProfileEducation() {
-  const [sscSelectedYear, setSSCSelectedYear] = useState("all");
+
+  const [years, setyears] = useState([]);
+  const navigate = useNavigate();
 
   const generateYears = () => {
     const currentYear = new Date().getFullYear();
@@ -13,11 +19,163 @@ function TutorUpdateProfileEducation() {
     return years;
   };
 
-  const handleSSCSelectChange = (e) => {
-    setSSCSelectedYear(e.target.value);
-  };
 
-  const years = generateYears();
+
+  // ---------------------------- this part is for backend ---------------------------------------------
+  const [tutorEducationInfo, settutorEducationInfo] = useState(
+    {
+      id : "",
+      sscInstitute : "",
+      sscCurriculum : "",
+      sscGroup : "",
+      sscPassingYear : "",
+      sscResult : "",
+      hscInstitute : "",
+      hscCurriculum : "",
+      hscGroup : "",
+      hscPassingYear :"",
+      hscResult : "",
+      varsityInstituteType: "",
+      varsityInstitute : "",
+      varsityDepartMent : "",
+      varsityPassingYear : "",
+      varsityResult : ""
+    
+  });
+
+  const [tutorPrimaryInfo, settutorPrimaryInfo] = useState({});
+
+  const callGetTutorEducationInfo = async() => {
+    const res = await GetTutorEducationInfo();
+
+    if (res){
+      settutorEducationInfo(res);
+    }
+  }
+
+  // 
+
+
+  const callGetTutorPrimaryInfo = async() =>{
+    try{
+      const res = await getTutorPrimaryInfo();
+      settutorPrimaryInfo(res);
+      callGetTutorEducationInfo();
+     } catch(error){
+      Swal.fire({
+        title: "Authorization Failed",
+        text: "Please Login again",
+        icon: "error"
+      });
+      navigate('/login');
+     }
+  }
+
+
+  useEffect(() => {
+    setyears(generateYears());
+    callGetTutorPrimaryInfo();
+  }, [])
+  
+
+  // ----------------------------------- now for getting all the input from the input field ------------------
+  const handleOnChange = (event) =>{
+    const name = event.target.name;
+    switch (name) {
+      case "ssc-institute":
+        settutorEducationInfo({...tutorEducationInfo , sscInstitute : event.target.value});
+        break;
+      case "ssc-curriculum":
+        settutorEducationInfo({...tutorEducationInfo , sscCurriculum : event.target.value});
+        break;
+      case "ssc-group":
+        settutorEducationInfo({...tutorEducationInfo , sscGroup : event.target.value});
+        break;
+      case "ssc-passing":
+        settutorEducationInfo({...tutorEducationInfo , sscPassingYear : event.target.value});
+        break;
+      case "ssc-result":
+        settutorEducationInfo({...tutorEducationInfo , sscResult : event.target.value});
+        break;
+      case "hsc-institute":
+        settutorEducationInfo({...tutorEducationInfo , hscInstitute : event.target.value});
+        break;
+      case "hsc-curriculum":
+        settutorEducationInfo({...tutorEducationInfo , hscCurriculum : event.target.value});
+        break;
+      case "hsc-group":
+        settutorEducationInfo({...tutorEducationInfo , hscGroup : event.target.value});
+        break;
+      case "hsc-passing":
+        settutorEducationInfo({...tutorEducationInfo , hscPassingYear : event.target.value});
+        break;
+      case "hsc-result":
+        settutorEducationInfo({...tutorEducationInfo , hscResult : event.target.value});
+        break;
+      case "varsity-institute-type":
+        settutorEducationInfo({...tutorEducationInfo , varsityInstituteType : event.target.value});
+        break;
+      case "varsity-institute":
+        settutorEducationInfo({...tutorEducationInfo , varsityInstitute : event.target.value});
+        break;
+      case "varsity-department":
+        settutorEducationInfo({...tutorEducationInfo , varsityDepartMent : event.target.value});
+        break;
+      case "varsity-passing":
+        settutorEducationInfo({...tutorEducationInfo , varsityPassingYear : event.target.value});
+        break;
+      case "varsity-result":
+        settutorEducationInfo({...tutorEducationInfo , varsityResult : event.target.value});
+        break;
+      default:
+        break;
+    }
+  }
+
+
+
+  // --------------------------------------- for updating the databse ------------------------------------------
+  const updateEduactionInfo = async ()=>{
+    // console.log(tutorEducationInfo);
+    if (tutorEducationInfo.id===""){
+      settutorEducationInfo({...tutorEducationInfo, id: tutorPrimaryInfo.id});
+      try{
+        await PostTutorEducationInfo({...tutorEducationInfo, id: tutorPrimaryInfo.id});  
+        Swal.fire({
+          title: "Profile Updated Successfully",
+          text: "Your Profile is now Updated",
+          icon: "success"
+        });
+      } catch (error){
+        Swal.fire({
+          title: "Update Unsuccessful",
+          text: "Error is " + error,
+          icon: "error"
+        });
+      }
+      
+    }
+    else{
+      try{
+        await PutTutorEducationInfo(tutorEducationInfo);
+        Swal.fire({
+          title: "Profile Updated Successfully",
+          text: "Your Profile is now Updated",
+          icon: "success"
+        });
+      } catch (error){
+        Swal.fire({
+          title: "Update Unsuccessful",
+          text: "Error is " + error,
+          icon: "error"
+        });
+      }
+      
+    }
+    
+  }
+
+  // --------------------------------------- this is the designing part------------------------------
 
   return (
     <div className='container-fluid education'>
@@ -32,15 +190,15 @@ function TutorUpdateProfileEducation() {
         <div className='row input-field-style' >
           <div className='col-3'>Institute</div>
           <div className='col-9'>
-            <input id="email-input" type="email" name="email-inputted" placeholder="Enter Institute Name.." />
+            <input id="institute" value={tutorEducationInfo.sscInstitute} type="text" name="ssc-institute" placeholder="Enter Institute Name.."  onChange={handleOnChange}/>
           </div>
         </div>
         <div className='row input-field-style' >
 
           <div className='col-3'>Curriculum</div>
           <div className='col-9'>
-            <select class="form-select" onChange={() => { }}>
-              <option selected value={"all"}>Select One</option>
+            <select class="form-select" value={tutorEducationInfo.sscCurriculum} onChange={handleOnChange} name="ssc-curriculum">
+              <option selected value={""}>Select One</option>
               <option value={"bangla"}>Bangla</option>
               <option value={"english"}>English</option>
               <option value={"madrasha"}>Madrasha</option>
@@ -50,10 +208,10 @@ function TutorUpdateProfileEducation() {
           </div>
         </div>
         <div className='row input-field-style' >
-          <div className='col-3'>Institute</div>
+          <div className='col-3'>Group</div>
           <div className='col-9'>
-            <select class="form-select" onChange={() => { }}>
-              <option selected value={"all"}>Select One</option>
+            <select class="form-select" value={tutorEducationInfo.sscGroup} name='ssc-group' onChange={handleOnChange}>
+              <option selected value={""}>Select One</option>
               <option value={"science"}>Science</option>
               <option value={"arts"}>Arts</option>
               <option value={"commerce"}>Commerce</option>
@@ -65,10 +223,11 @@ function TutorUpdateProfileEducation() {
           <div className='col-9'>
             <select
               className="form-select"
-              onChange={handleSSCSelectChange}
-              value={sscSelectedYear}
+              name="ssc-passing"
+              onChange={handleOnChange}
+              value={tutorEducationInfo.sscPassingYear}
             >
-              <option value="all">Select One</option>
+              <option value="">Select One</option>
               {years.map((year, index) => (
                 <option key={index} value={year}>{year}</option>
               ))}
@@ -78,7 +237,7 @@ function TutorUpdateProfileEducation() {
         <div className='row input-field-style' >
             <div className='col-3'>Result</div>
             <div className='col-9'>
-            <input id="email-input" type="email" name="email-inputted" placeholder="Enter Institute Name.."/>
+            <input id="ssc-result" type="text" value={tutorEducationInfo.sscResult} name="ssc-result" placeholder="Enter Institute Name.." onChange={handleOnChange}/>
             </div>
         </div>
 
@@ -93,15 +252,15 @@ function TutorUpdateProfileEducation() {
         <div className='row input-field-style' >
           <div className='col-3'>Institute</div>
           <div className='col-9'>
-            <input id="email-input" type="email" name="email-inputted" placeholder="Enter Institute Name.." />
+            <input id="hsc-institute" value={tutorEducationInfo.hscInstitute} onChange={handleOnChange} type="text" name="hsc-institute" placeholder="Enter Institute Name.." />
           </div>
         </div>
         <div className='row input-field-style' >
 
           <div className='col-3'>Curriculum</div>
           <div className='col-9'>
-            <select class="form-select" onChange={() => { }}>
-              <option selected value={"all"}>Select One</option>
+            <select class="form-select" name="hsc-curriculum" value={tutorEducationInfo.sscCurriculum} onChange={handleOnChange}>
+              <option selected value={""}>Select One</option>
               <option value={"bangla"}>Bangla</option>
               <option value={"english"}>English</option>
               <option value={"madrasha"}>Madrasha</option>
@@ -111,10 +270,10 @@ function TutorUpdateProfileEducation() {
           </div>
         </div>
         <div className='row input-field-style' >
-          <div className='col-3'>Institute</div>
+          <div className='col-3'>Group</div>
           <div className='col-9'>
-            <select class="form-select" onChange={() => { }}>
-              <option selected value={"all"}>Select One</option>
+            <select class="form-select" name="hsc-group" value={tutorEducationInfo.hscGroup} onChange={handleOnChange}>
+              <option selected value={""}>Select One</option>
               <option value={"science"}>Science</option>
               <option value={"arts"}>Arts</option>
               <option value={"commerce"}>Commerce</option>
@@ -126,8 +285,9 @@ function TutorUpdateProfileEducation() {
           <div className='col-9'>
             <select
               className="form-select"
-              onChange={handleSSCSelectChange}
-              value={sscSelectedYear}
+              name="hsc-passing"
+              onChange={handleOnChange}
+              value={tutorEducationInfo.hscPassingYear}
             >
               <option value="all">Select One</option>
               {years.map((year, index) => (
@@ -139,7 +299,7 @@ function TutorUpdateProfileEducation() {
         <div className='row input-field-style' >
             <div className='col-3'>Result</div>
             <div className='col-9'>
-            <input id="email-input" type="email" name="email-inputted" placeholder="Enter Institute Name.."/>
+            <input id="hsc-result" type="text" name="hsc-result" onChange={handleOnChange} value={tutorEducationInfo.hscResult} placeholder="Enter Institute Name.."/>
             </div>
         </div>
 
@@ -154,8 +314,8 @@ function TutorUpdateProfileEducation() {
         <div className='row input-field-style' >
           <div className='col-3'>Institute Type</div>
           <div className='col-9'>
-            <select class="form-select" onChange={() => { }}>
-              <option selected value={"all"}>Select One</option>
+            <select class="form-select" name="varsity-institute-type" value={tutorEducationInfo.varsityInstituteType} onChange={handleOnChange}>
+              <option selected value={""}>Select One</option>
               <option value={"public"}>Public</option>
               <option value={"private"}>Private</option>
               <option value={"national"}>National</option>
@@ -165,8 +325,8 @@ function TutorUpdateProfileEducation() {
         <div className='row input-field-style' >
           <div className='col-3'>Institute</div>
           <div className='col-9'>
-            <select class="form-select" onChange={() => { }}>
-              <option selected value={"all"}>Select One</option>
+            <select class="form-select" onChange={handleOnChange} name="varsity-institute" value={tutorEducationInfo.varsityInstitute}>
+              <option selected value={""}>Select One</option>
               <option value={"buet"}>Bangladesh University of Engineering and Technology (BUET)</option>
               <option value={"kuet"}>Khulna University of Engineering and Technology (KUET)</option>
               <option value={"ruet"}>Rajshahi University of Engineering and Technology (RUET)</option>
@@ -179,7 +339,7 @@ function TutorUpdateProfileEducation() {
         <div className='row input-field-style' >
           <div className='col-3'>Department</div>
           <div className='col-9'>
-            <select class="form-select" onChange={() => { }}>
+            <select class="form-select" onChange={handleOnChange} name="varsity-department" value={tutorEducationInfo.varsityDepartMent}>
               <option selected value={"all"}>Select One</option>
               <option value={"CSE"}>Computer Science and Technology (CSE)</option>
               <option value={"ME"}>Mechanical Engineering (ME)</option>
@@ -193,8 +353,9 @@ function TutorUpdateProfileEducation() {
           <div className='col-9'>
             <select
               className="form-select"
-              onChange={handleSSCSelectChange}
-              value={sscSelectedYear}
+              onChange={handleOnChange}
+              name="varsity-passing"
+              value={tutorEducationInfo.varsityPassingYear}
             >
               <option value="all">Select One</option>
               {years.map((year, index) => (
@@ -206,7 +367,7 @@ function TutorUpdateProfileEducation() {
         <div className='row input-field-style' >
             <div className='col-3'>CGPA / Current CGPA</div>
             <div className='col-9'>
-            <input id="email-input" type="email" name="email-inputted" placeholder="Enter Institute Name.."/>
+            <input id="varsity-result" type="text" name="varsity-result" value={tutorEducationInfo.varsityResult} onChange={handleOnChange} placeholder="Enter Institute Name.."/>
             </div>
         </div>
 
@@ -214,7 +375,7 @@ function TutorUpdateProfileEducation() {
       
       {/* ------------------------------------------- End of the university section ------------------------------- */}
       <div className='text-center' style={{margin: '30px 0px'}}>
-       <button className="btn btn-1 gradient_bg text-light">Next</button>
+       <button className="btn btn-1 gradient_bg text-light" onClick={updateEduactionInfo}>Update</button>
       </div>
       
     </div>

@@ -7,6 +7,7 @@ import "slick-carousel/slick/slick-theme.css";
 
 function App(props) {
   
+
   return (
     <div className='main' style={{position:'realtive'}}>
       <NavbarComponent></NavbarComponent>

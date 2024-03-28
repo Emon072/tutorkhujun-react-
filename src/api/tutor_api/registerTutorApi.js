@@ -19,6 +19,13 @@ export const registerNewTutorPrimaryInfo = (tutorPrimaryInfo) => {
     });
 }
 
+export const getTutorPrimaryInfo = () =>{
+    return tutorCallApi({
+        url : "/get-tutor-primary",
+        method : "GET",
+    });
+}
+
 export const tutorLogin = (phoneNumber , Inputpassword) =>{
     // console.log(phoneNumber , Inputpassword);
     return tutorAxiosCall({

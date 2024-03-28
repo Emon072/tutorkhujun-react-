@@ -3,6 +3,7 @@ import './TutorProfilePart1.scss'
 
 function TutorProfilePart1({ dashboard }) {
 
+    
 
     return (
         <div className='tutor-profile-part1 fixed-left' style={{ flexFlow: 'column' }}>

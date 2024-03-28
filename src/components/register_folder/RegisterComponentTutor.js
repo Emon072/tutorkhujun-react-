@@ -82,7 +82,7 @@ function RegisterComponentTutor() {
         title: "Registration successfull",
         icon: "success"
       });
-      navigate('/t-profile');
+      navigate('/t-profile/update');
     } catch(error){
       Swal.fire({
         title: "Operation Unsuccessful",

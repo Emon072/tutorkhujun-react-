@@ -5,7 +5,7 @@ import TutorUpdateProfileTutorInfo from './TutorUpdateProfileTutorInfo';
 
 function TutorUpdateProfileMain() {
 
-    const [currentActive, setcurrentActive] = useState(1);
+    const [currentActive, setcurrentActive] = useState(0);
     const moveHandle = (event)=>{
         
         const clickedElementName = event.currentTarget.getAttribute('name');

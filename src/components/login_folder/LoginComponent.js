@@ -21,13 +21,13 @@ function LoginComponent(props) {
   const tutorLoginControl = async (phoneNumber , password) =>{
     try {
       const response = await tutorLogin(phoneNumber , password);
-      // console.log(response.token);
-      localStorage.getItem("token" , response.token);
+      console.log(response.token);
+      localStorage.setItem("token" , response.token);
       Swal.fire({
         title: "Login successfully",
         icon: "success"
       });
-      navigate('/t-profile');
+      navigate('/t-profile/update');
     } catch (error) {
       Swal.fire({
         title: "Operation Unsuccessful",

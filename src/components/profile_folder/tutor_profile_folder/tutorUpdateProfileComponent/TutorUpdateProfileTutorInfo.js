@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState , useEffect} from 'react'
 import './TutorUpdateProfileTutorInfo.scss';
 import { DistrictInfoArr } from '../../../../assets/mockDataset/DistrictInfo';
 import Multiselect from 'multiselect-react-dropdown';
@@ -6,57 +6,146 @@ import MediumInfoArr from '../../../../assets/mockDataset/MediumInfo';
 import subjectInfoArr from '../../../../assets/mockDataset/SubjectsInfo';
 import timingShiftArr from '../../../../assets/mockDataset/TimingShiftArr';
 import PrefferedTutoringStyleArr from '../../../../assets/mockDataset/PrefferedTutoringStyle';
+import { PostTutorTutionInfo, PutTutorTutionInfo, getTutorTutionInfo } from '../../../../api/tutor_api/TutorTutionInfo';
+import { getTutorPrimaryInfo } from '../../../../api/tutor_api/registerTutorApi';
+import Swal from 'sweetalert2';
 
 function TutorUpdateProfileTutorInfo() {
+    const [districtNumber, setdistrict] = useState("")
     const [seletedArea, setseletedArea] = useState([]);
-    const [selectedOptions, setSelectedOptions] = useState([]);
     const [selectedClasses, setselectedClasses] = useState([]);
-    const [selectedClassesOptions, setselectedClassesOptions] = useState([])
-    const [selectMediumClickOption, setselectMediumClickOption] = useState([])
-    const [selectedSubjectOption, setselectedSubjectOption] = useState([])
-    const [selectShiftOption, setselectShiftOption] = useState([])
-    const [selectPrefferedTutoringStyle, setselectPrefferedTutoringStyle] = useState([])
-    
 
+    const MediumOptions = ['Bangla Medium','English Medium','English Version', 'Religious Studies'];
+
+    const [tutorTutionInfo, settutorTutionInfo] = useState({
+      id : "",
+      tutionDistrict : "",
+      tutorReferredAreas : [],
+      tutorReferredMedium : [],
+      tutorPreferredClasses : [],
+      tutorPreferredSubjects : [],
+      daysPerWeek : "",
+      timingShift : [],
+      expectedSalary : "",
+      preferredTutionType : []
+    });
+    
 
 
   // ------------------------ this part is for district select ------------------------------
   const handleDivisionClick = (event) => {
     if (event.target.value!=='all')
-        setseletedArea(DistrictInfoArr[event.target.value].area);
+      setdistrict(event.target.value);
+      setseletedArea(DistrictInfoArr[event.target.value].area);
+      settutorTutionInfo({...tutorTutionInfo , tutionDistrict : DistrictInfoArr[event.target.value].district});
   };
   
 
   const handleAreaClick = (selectedList, selectedItem) => {
-    // Handle selection changes
-    setSelectedOptions(selectedList);
+    settutorTutionInfo({...tutorTutionInfo , tutorReferredAreas : selectedList});
   };
 
   //---------------------------- this part is for medium select --------------------------
   const handleMediumClick = (selectedList , selectedItem) => {
-    setselectMediumClickOption(selectedList);
-    // console.log(selectedItem);
-    setselectedClasses([...selectedClasses, ...selectedItem.classes]);
-
+    const tmpClassList = MediumInfoArr.find(m => m.medium === selectedItem);
+    
+    setselectedClasses([...selectedClasses , ...tmpClassList.classes]);
+    settutorTutionInfo({...tutorTutionInfo , tutorReferredMedium : selectedList});
   };
+
   const handleClassClick = (selectedList , selectedItem) => {
-    setselectedClassesOptions(selectedList);
+    settutorTutionInfo({...tutorTutionInfo , tutorPreferredClasses : selectedList});
   };
 
   // ----------------------------- this is for subject select ------------------------------
   const handleSubjectClick = (selectedList , selectedItem) => {
-    setselectedSubjectOption(selectedList);
+    settutorTutionInfo({...tutorTutionInfo , tutorPreferredSubjects : selectedList});
   }
 
   // --------------------------- this is for selecting shift -------------------------------
   const handleShiftSelect = (selectedList , selectedItem) =>{
-    setselectShiftOption(selectedList);
+    settutorTutionInfo({...tutorTutionInfo , timingShift : selectedList});
   }
 
   // -------------------------------- this is for selecting preffered Tutoring Style --------------
   const handleTutoringStyle = (selectedList , selectedItem) =>{
-    setselectPrefferedTutoringStyle(selectedList);
+    settutorTutionInfo({...tutorTutionInfo , preferredTutionType : selectedList});
   }
+
+  const selectDays = (event)=>{
+    settutorTutionInfo({...tutorTutionInfo , daysPerWeek : event.target.value});
+  }
+  const selectSalary = (event) =>{
+    settutorTutionInfo({...tutorTutionInfo , expectedSalary : event.target.value});
+  }
+
+  // ----------------------------------------- this part is for backed-------------------
+
+  const [tutorPrimaryInfo, settutorPrimaryInfo] = useState({});
+
+  const callGetTutorTutionInfo =  async() =>{
+    const res = await getTutorTutionInfo();
+    if (res){
+      settutorTutionInfo(res);
+      // console.log(res)
+      
+      for (let i = 0; i< DistrictInfoArr.length; i++){
+        if (DistrictInfoArr[i].district===res.tutionDistrict){
+          setdistrict(i);
+        }
+      }
+    }
+  }
+
+  const callGetTutorPrimaryInfo = async() =>{
+    const res = await getTutorPrimaryInfo();
+    settutorPrimaryInfo(res);
+    callGetTutorTutionInfo();
+  }
+
+  useEffect(() => {
+    callGetTutorPrimaryInfo();
+  }, [])
+  
+
+  const handleUpdateToDatabase = () =>{
+    if (tutorTutionInfo.id===""){
+      settutorTutionInfo({...tutorTutionInfo, id : tutorPrimaryInfo.id});
+      try{
+
+        PostTutorTutionInfo({...tutorTutionInfo, id : tutorPrimaryInfo.id});
+        Swal.fire({
+          title: "Updated Successfully",
+          text: "Now Your Profile will Show to the public",
+          icon: "success"
+        });
+      } catch(error) {
+        Swal.fire({
+          title: "Update Unsuccessfull",
+          text: "Error is : "+error ,
+          icon: "error"
+        });
+      }
+    }
+    else{
+      
+      try{
+        PutTutorTutionInfo(tutorTutionInfo);
+        Swal.fire({
+          title: "Updated Successfully",
+          text: "Now Your Profile will Show to the public",
+          icon: "success"
+        });
+      } catch(error) {
+        Swal.fire({
+          title: "Update Unsuccessfull",
+          text: "Error is : "+error ,
+          icon: "error"
+        });
+      }
+    }
+  }
+  
 
   return (
     <div className='container-fluid education'>
@@ -71,7 +160,7 @@ function TutorUpdateProfileTutorInfo() {
         <div className='row align-items-center input-field-style' >
           <div className='col-3'>Select provide tuition district: <span style={{color:'red'}}>*</span></div>
           <div className='col-9'>
-            <select class="form-select" onChange={handleDivisionClick}>
+            <select class="form-select" value={districtNumber} onChange={handleDivisionClick}>
               <option selected value={"all"}>
                 All
               </option>
@@ -94,7 +183,7 @@ function TutorUpdateProfileTutorInfo() {
           <div className='col-9 multi-select'>
             <Multiselect
               options={seletedArea} // Options array
-              selectedValues={selectedOptions} // Preselected value to persist in dropdown
+              selectedValues={tutorTutionInfo.tutorReferredAreas} // Preselected value to persist in dropdown
               onSelect={handleAreaClick} // Function will trigger on select event
               onRemove={handleAreaClick} // Function will trigger on remove event
               displayValue="area" // Property name to display in the dropdown options
@@ -110,12 +199,12 @@ function TutorUpdateProfileTutorInfo() {
           <div className='col-9 multi-select'>
 
             <Multiselect
-              options={MediumInfoArr} // Options array
-              selectedValues={selectMediumClickOption} // Preselected value to persist in dropdown
+              options={MediumOptions} // Options array
+              selectedValues={tutorTutionInfo.tutorReferredMedium} // Preselected value to persist in dropdown
               onSelect={handleMediumClick} // Function will trigger on select event
               onRemove={handleMediumClick} // Function will trigger on remove event
               displayValue="medium" // Property name to display in the dropdown options
-              // isObject={false}
+              isObject={false}
             />
 
 
@@ -127,7 +216,7 @@ function TutorUpdateProfileTutorInfo() {
           <div className='col-9 multi-select'>
             <Multiselect
               options={selectedClasses} // Options array
-              selectedValues={selectedClassesOptions} // Preselected value to persist in dropdown
+              selectedValues={tutorTutionInfo.tutorPreferredClasses} // Preselected value to persist in dropdown
               onSelect={handleClassClick} // Function will trigger on select event
               onRemove={handleClassClick} // Function will trigger on remove event
               displayValue="classes" // Property name to display in the dropdown options
@@ -145,7 +234,7 @@ function TutorUpdateProfileTutorInfo() {
             <Multiselect
               // placeholder='Select'
               options={subjectInfoArr} // Options array
-              selectedValues={selectedSubjectOption} // Preselected value to persist in dropdown
+              selectedValues={tutorTutionInfo.tutorPreferredSubjects} // Preselected value to persist in dropdown
               onSelect={handleSubjectClick} // Function will trigger on select event
               onRemove={handleSubjectClick} // Function will trigger on remove event
               displayValue="classes" // Property name to display in the dropdown options
@@ -159,15 +248,14 @@ function TutorUpdateProfileTutorInfo() {
         <div className='row align-items-center  input-field-style' >
           <div className='col-3'>Days Per Week:</div>
           <div className='col-9'>
-            <select className="form-select">
-              <option selected value={"all"}>Select One</option>
-              {Array(7).keys().map((day) => (
-                <option key={day + 1} value={day + 1}>
-                  {day + 1} {day === 0 ? 'day' : 'days'}
+          <select className="form-select" onChange={selectDays} value={tutorTutionInfo.daysPerWeek}>
+            <option value={""}>Select One</option>
+              {[...Array(7)].map((_, index) => (
+                <option key={index + 1} value={index + 1}>
+                  {index + 1} {index === 0 ? 'day' : 'days'}
                 </option>
               ))}
             </select>
-
           </div>
         </div>
         
@@ -178,7 +266,7 @@ function TutorUpdateProfileTutorInfo() {
             <Multiselect
               // placeholder='Select'
               options={timingShiftArr} // Options array
-              selectedValues={selectShiftOption} // Preselected value to persist in dropdown
+              selectedValues={tutorTutionInfo.timingShift} // Preselected value to persist in dropdown
               onSelect={handleShiftSelect} // Function will trigger on select event
               onRemove={handleShiftSelect} // Function will trigger on remove event
               displayValue="classes" // Property name to display in the dropdown options
@@ -193,8 +281,8 @@ function TutorUpdateProfileTutorInfo() {
         <div className='row align-items-center  input-field-style' >
           <div className='col-3'>Expected Salary:</div>
           <div className='col-9'>
-          <select className="form-select">
-            <option selected value={"all"}>Select One</option>
+          <select className="form-select" onChange={selectSalary} value={tutorTutionInfo.expectedSalary}>
+            <option selected value={""}>Select One</option>
             {[...Array(15).keys()].map((_, index) => (
               <option key={index + 1} value={(index + 1) * 500}>
                 {(index + 1) * 500} Tk/Month
@@ -213,7 +301,7 @@ function TutorUpdateProfileTutorInfo() {
             <Multiselect
               // placeholder='Select'
               options={PrefferedTutoringStyleArr} // Options array
-              selectedValues={selectPrefferedTutoringStyle} // Preselected value to persist in dropdown
+              selectedValues={tutorTutionInfo.preferredTutionType} // Preselected value to persist in dropdown
               onSelect={handleTutoringStyle} // Function will trigger on select event
               onRemove={handleTutoringStyle} // Function will trigger on remove event
               displayValue="classes" // Property name to display in the dropdown options
@@ -228,7 +316,7 @@ function TutorUpdateProfileTutorInfo() {
       
       {/* ------------------------------------------- End of the university section ------------------------------- */}
       <div className='text-center' style={{margin: '30px 0px'}}>
-       <button className="btn btn-1 gradient_bg text-light">Next</button>
+       <button className="btn btn-1 gradient_bg text-light" onClick={handleUpdateToDatabase} >Update</button>
       </div>
     </div>
   )
