@@ -1,10 +1,11 @@
 import React , {useState} from 'react'
 import './TutorUpdateProfileMain.scss';
 import TutorUpdateProfileEducation from './TutorUpdateProfileEducation';
+import TutorUpdateProfileTutorInfo from './TutorUpdateProfileTutorInfo';
 
 function TutorUpdateProfileMain() {
 
-    const [currentActive, setcurrentActive] = useState(0);
+    const [currentActive, setcurrentActive] = useState(1);
     const moveHandle = (event)=>{
         
         const clickedElementName = event.currentTarget.getAttribute('name');
@@ -49,6 +50,7 @@ function TutorUpdateProfileMain() {
             </div>
             <div className='row'>
                 {currentActive===0 && <TutorUpdateProfileEducation></TutorUpdateProfileEducation>}
+                {currentActive===1 && <TutorUpdateProfileTutorInfo/>}
             </div>
         </div>
 

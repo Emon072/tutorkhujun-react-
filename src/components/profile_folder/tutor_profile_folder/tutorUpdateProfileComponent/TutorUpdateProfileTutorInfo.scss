@@ -1,0 +1,19 @@
+.multi-select{
+    // height: 20px !important;
+    input{
+        width: 0% !important;
+        padding: 0px !important;
+        
+    }
+    .chip{
+        // margin: 0px !important;
+        background-color: purple;
+    }
+    .highlightOption{
+        background: purple;
+    }
+}
+.multi-select input::placeholder {
+    /* Set placeholder text to be transparent */
+    color: transparent;
+}

@@ -4,6 +4,7 @@ import { DistrictInfoArr } from "../../assets/mockDataset/DistrictInfo";
 import Swal from 'sweetalert2'
 import { registerNewTutorLogin, registerNewTutorPrimaryInfo } from '../../api/tutor_api/registerTutorApi';
 import { useNavigate } from 'react-router-dom';
+import randomImageUrl from '../../assets/mockDataset/RandomImage';
 
 function RegisterComponentTutor() {
 
@@ -96,8 +97,9 @@ function RegisterComponentTutor() {
       // localStorage.clear();
       const tutor = await registerNewTutorLogin(tutorLoginInfo);
       localStorage.setItem("token", tutor.token);
-      settutorPrimaryInfo({...tutorPrimaryInfo , id : tutor.id, profilePicture : "https://png.pngtree.com/png-vector/20220709/ourmid/pngtree-businessman-user-avatar-wearing-suit-with-red-tie-png-image_5809521.png"});
-      registerTutorPrimaryInfo({...tutorPrimaryInfo , id : tutor.id, profilePicture : "https://png.pngtree.com/png-vector/20220709/ourmid/pngtree-businessman-user-avatar-wearing-suit-with-red-tie-png-image_5809521.png"});
+      const randomImgLink =  randomImageUrl;
+      settutorPrimaryInfo({...tutorPrimaryInfo , id : tutor.id, profilePicture : randomImgLink});
+      registerTutorPrimaryInfo({...tutorPrimaryInfo , id : tutor.id, profilePicture : randomImgLink});
     }catch(error){
       Swal.fire({
         title: "Operation Unsuccessful",
