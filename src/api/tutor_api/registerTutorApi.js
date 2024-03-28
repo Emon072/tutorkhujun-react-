@@ -10,11 +10,18 @@ export const registerNewTutorLogin = (tutor) => {
 }
 
 export const registerNewTutorPrimaryInfo = (tutorPrimaryInfo) => {
-    // console.log(tutorPrimaryInfo);
-    // return "";
+
     return tutorCallApi({
         url : "/add-tutor-primary",
         method : "POST",
+        data : tutorPrimaryInfo,
+    });
+}
+
+export const updateNewTutorPrimaryInfo = (tutorPrimaryInfo) => {
+    return tutorCallApi({
+        url : "/update-tutor-primary",
+        method : "PUT",
         data : tutorPrimaryInfo,
     });
 }

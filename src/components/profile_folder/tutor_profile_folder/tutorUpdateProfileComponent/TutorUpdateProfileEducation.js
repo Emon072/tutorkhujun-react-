@@ -1,14 +1,17 @@
 import React, { useState, useEffect } from 'react'
 import './TutorUpdateProfileEducation.scss'
 import { GetTutorEducationInfo, PostTutorEducationInfo, PutTutorEducationInfo } from '../../../../api/tutor_api/TutorEducationInfo';
-import { getTutorPrimaryInfo } from '../../../../api/tutor_api/registerTutorApi';
+import { getTutorPrimaryInfo, updateNewTutorPrimaryInfo } from '../../../../api/tutor_api/registerTutorApi';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
+import useTutorPrimaryProfile from '../../../Store/TutorPrimaryProfileStore';
 
 function TutorUpdateProfileEducation() {
 
   const [years, setyears] = useState([]);
   const navigate = useNavigate();
+
+  const { tutorPrimaryInfoStore, setTutorPrimaryInfoStore } = useTutorPrimaryProfile();
 
   const generateYears = () => {
     const currentYear = new Date().getFullYear();
@@ -43,7 +46,6 @@ function TutorUpdateProfileEducation() {
     
   });
 
-  const [tutorPrimaryInfo, settutorPrimaryInfo] = useState({});
 
   const callGetTutorEducationInfo = async() => {
     const res = await GetTutorEducationInfo();
@@ -59,7 +61,9 @@ function TutorUpdateProfileEducation() {
   const callGetTutorPrimaryInfo = async() =>{
     try{
       const res = await getTutorPrimaryInfo();
-      settutorPrimaryInfo(res);
+
+      setTutorPrimaryInfoStore(res);
+
       callGetTutorEducationInfo();
      } catch(error){
       Swal.fire({
@@ -138,14 +142,23 @@ function TutorUpdateProfileEducation() {
   const updateEduactionInfo = async ()=>{
     // console.log(tutorEducationInfo);
     if (tutorEducationInfo.id===""){
-      settutorEducationInfo({...tutorEducationInfo, id: tutorPrimaryInfo.id});
+      settutorEducationInfo({...tutorEducationInfo, id: tutorPrimaryInfoStore.id});
       try{
-        await PostTutorEducationInfo({...tutorEducationInfo, id: tutorPrimaryInfo.id});  
+        await PostTutorEducationInfo({...tutorEducationInfo, id: tutorPrimaryInfoStore.id});  
         Swal.fire({
           title: "Profile Updated Successfully",
           text: "Your Profile is now Updated",
           icon: "success"
         });
+
+        const tmpPrimaryTutorInfo = {...tutorPrimaryInfoStore, varsity: tutorEducationInfo.varsityInstitute , subject: tutorEducationInfo.varsityDepartMent};
+        
+        try{
+          // console.log(tutorEducationInfo);
+          await updateNewTutorPrimaryInfo(tmpPrimaryTutorInfo);
+          // console.log(res);
+        }catch(error){}
+
       } catch (error){
         Swal.fire({
           title: "Update Unsuccessful",
@@ -163,6 +176,14 @@ function TutorUpdateProfileEducation() {
           text: "Your Profile is now Updated",
           icon: "success"
         });
+        const tmpPrimaryTutorInfo = {...tutorPrimaryInfoStore, varsity: tutorEducationInfo.varsityInstitute , subject: tutorEducationInfo.varsityDepartMent};
+        
+        try{
+          // console.log(tutorEducationInfo);
+          await updateNewTutorPrimaryInfo(tmpPrimaryTutorInfo);
+          // console.log(res);
+        }catch(error){}
+
       } catch (error){
         Swal.fire({
           title: "Update Unsuccessful",
@@ -327,12 +348,12 @@ function TutorUpdateProfileEducation() {
           <div className='col-9'>
             <select class="form-select" onChange={handleOnChange} name="varsity-institute" value={tutorEducationInfo.varsityInstitute}>
               <option selected value={""}>Select One</option>
-              <option value={"buet"}>Bangladesh University of Engineering and Technology (BUET)</option>
-              <option value={"kuet"}>Khulna University of Engineering and Technology (KUET)</option>
-              <option value={"ruet"}>Rajshahi University of Engineering and Technology (RUET)</option>
-              <option value={"cuet"}>Chittagong University of Engineering and Technology (CUET)</option>
-              <option value={"du"}> Dhaka University ( DU )</option>
-              <option value={"sust"}> Shahjalal University of Science and Technology (SUST)</option>
+              <option value={"Bangladesh University of Engineering and Technology (BUET)"}>Bangladesh University of Engineering and Technology (BUET)</option>
+              <option value={"Khulna University of Engineering and Technology (KUET)"}>Khulna University of Engineering and Technology (KUET)</option>
+              <option value={"Rajshahi University of Engineering and Technology (RUET)"}>Rajshahi University of Engineering and Technology (RUET)</option>
+              <option value={"Chittagong University of Engineering and Technology (CUET)"}>Chittagong University of Engineering and Technology (CUET)</option>
+              <option value={"Dhaka University ( DU )"}> Dhaka University ( DU )</option>
+              <option value={"Shahjalal University of Science and Technology (SUST)"}> Shahjalal University of Science and Technology (SUST)</option>
             </select>
           </div>
         </div>
@@ -341,10 +362,10 @@ function TutorUpdateProfileEducation() {
           <div className='col-9'>
             <select class="form-select" onChange={handleOnChange} name="varsity-department" value={tutorEducationInfo.varsityDepartMent}>
               <option selected value={"all"}>Select One</option>
-              <option value={"CSE"}>Computer Science and Technology (CSE)</option>
-              <option value={"ME"}>Mechanical Engineering (ME)</option>
-              <option value={"EEE"}>Electrical and Electronics Engineering (EEE)</option>
-              <option value={"ChE"}>Chemical Engineering (ChE)</option>
+              <option value={"Computer Science and Technology (CSE)"}>Computer Science and Technology (CSE)</option>
+              <option value={"Mechanical Engineering (ME)"}>Mechanical Engineering (ME)</option>
+              <option value={"Electrical and Electronics Engineering (EEE)"}>Electrical and Electronics Engineering (EEE)</option>
+              <option value={"Chemical Engineering (ChE)"}>Chemical Engineering (ChE)</option>
             </select>
           </div>
         </div>

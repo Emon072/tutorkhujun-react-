@@ -12,7 +12,7 @@ function PremiumTutorPart2() {
                 <div className='row'>
                     {teacherInfoArr.map((obj, i) => {
                         return (
-                            <div key={i} className="col tutor-card tutor-card-view" style={{maxWidth:'263px', margin: '4px' }}>
+                            <div key={i} className="col tutor-card tutor-card-view" style={{maxWidth:'280px', margin: '4px' }}>
 
                                 <div className="text-center for-premium-style">
                                     <img

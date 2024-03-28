@@ -1,14 +1,15 @@
 import React from 'react'
 import './TutorProfilePart1.scss'
+import useTutorPrimaryProfile from '../../Store/TutorPrimaryProfileStore'
 
 function TutorProfilePart1({ dashboard }) {
 
-    
+    const {tutorPrimaryInfoStore} = useTutorPrimaryProfile();
 
     return (
         <div className='tutor-profile-part1 fixed-left' style={{ flexFlow: 'column' }}>
             <div className='text-center dashboard-container'>
-                <img src='https://png.pngtree.com/png-vector/20220709/ourmid/pngtree-businessman-user-avatar-wearing-suit-with-red-tie-png-image_5809521.png' alt=''></img>
+                <img src= {tutorPrimaryInfoStore.profilePicture==="" ? 'https://png.pngtree.com/png-vector/20220709/ourmid/pngtree-businessman-user-avatar-wearing-suit-with-red-tie-png-image_5809521.png' : tutorPrimaryInfoStore.profilePicture}  alt=''></img>
             </div>
             <div className='text-center title-1'>
                 <p>Name</p>

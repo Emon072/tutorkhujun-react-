@@ -7,8 +7,9 @@ import subjectInfoArr from '../../../../assets/mockDataset/SubjectsInfo';
 import timingShiftArr from '../../../../assets/mockDataset/TimingShiftArr';
 import PrefferedTutoringStyleArr from '../../../../assets/mockDataset/PrefferedTutoringStyle';
 import { PostTutorTutionInfo, PutTutorTutionInfo, getTutorTutionInfo } from '../../../../api/tutor_api/TutorTutionInfo';
-import { getTutorPrimaryInfo } from '../../../../api/tutor_api/registerTutorApi';
 import Swal from 'sweetalert2';
+import useTutorPrimaryProfile from '../../../Store/TutorPrimaryProfileStore';
+import { updateNewTutorPrimaryInfo } from '../../../../api/tutor_api/registerTutorApi';
 
 function TutorUpdateProfileTutorInfo() {
     const [districtNumber, setdistrict] = useState("")
@@ -34,10 +35,12 @@ function TutorUpdateProfileTutorInfo() {
 
   // ------------------------ this part is for district select ------------------------------
   const handleDivisionClick = (event) => {
-    if (event.target.value!=='all')
+    if (event.target.value!=='all'){
       setdistrict(event.target.value);
       setseletedArea(DistrictInfoArr[event.target.value].area);
       settutorTutionInfo({...tutorTutionInfo , tutionDistrict : DistrictInfoArr[event.target.value].district});
+    }
+      
   };
   
 
@@ -81,13 +84,13 @@ function TutorUpdateProfileTutorInfo() {
 
   // ----------------------------------------- this part is for backed-------------------
 
-  const [tutorPrimaryInfo, settutorPrimaryInfo] = useState({});
+  // const [tutorPrimaryInfo, settutorPrimaryInfo] = useState({});
+  const {tutorPrimaryInfoStore} = useTutorPrimaryProfile();
 
   const callGetTutorTutionInfo =  async() =>{
     const res = await getTutorTutionInfo();
     if (res){
       settutorTutionInfo(res);
-      // console.log(res)
       
       for (let i = 0; i< DistrictInfoArr.length; i++){
         if (DistrictInfoArr[i].district===res.tutionDistrict){
@@ -97,28 +100,31 @@ function TutorUpdateProfileTutorInfo() {
     }
   }
 
-  const callGetTutorPrimaryInfo = async() =>{
-    const res = await getTutorPrimaryInfo();
-    settutorPrimaryInfo(res);
-    callGetTutorTutionInfo();
-  }
 
   useEffect(() => {
-    callGetTutorPrimaryInfo();
+    callGetTutorTutionInfo();
   }, [])
   
 
-  const handleUpdateToDatabase = () =>{
+  const handleUpdateToDatabase = async () =>{
     if (tutorTutionInfo.id===""){
-      settutorTutionInfo({...tutorTutionInfo, id : tutorPrimaryInfo.id});
+      settutorTutionInfo({...tutorTutionInfo, id : tutorPrimaryInfoStore.id});
       try{
 
-        PostTutorTutionInfo({...tutorTutionInfo, id : tutorPrimaryInfo.id});
+        await PostTutorTutionInfo({...tutorTutionInfo, id : tutorPrimaryInfoStore.id});
         Swal.fire({
           title: "Updated Successfully",
           text: "Now Your Profile will Show to the public",
           icon: "success"
         });
+        const tmpPrimaryTutorInfo = {...tutorPrimaryInfoStore, tutionDistrict: tutorTutionInfo.tutionDistrict, tutionLocation: tutorTutionInfo.tutorReferredAreas, Medium: tutorTutionInfo.tutorReferredMedium, classes: tutorTutionInfo.tutorPreferredClasses, tutionType: tutorTutionInfo.preferredTutionType};
+        
+        try{
+          // console.log(tutorEducationInfo);
+          await updateNewTutorPrimaryInfo(tmpPrimaryTutorInfo);
+          // console.log(res);
+        }catch(error){}
+
       } catch(error) {
         Swal.fire({
           title: "Update Unsuccessfull",
@@ -130,12 +136,21 @@ function TutorUpdateProfileTutorInfo() {
     else{
       
       try{
-        PutTutorTutionInfo(tutorTutionInfo);
+        await PutTutorTutionInfo(tutorTutionInfo);
         Swal.fire({
           title: "Updated Successfully",
           text: "Now Your Profile will Show to the public",
           icon: "success"
         });
+
+        const tmpPrimaryTutorInfo = {...tutorPrimaryInfoStore, tutionDistrict: tutorTutionInfo.tutionDistrict, tutionLocation: tutorTutionInfo.tutorReferredAreas, Medium: tutorTutionInfo.tutorReferredMedium, classes: tutorTutionInfo.tutorPreferredClasses, tutionType: tutorTutionInfo.preferredTutionType};
+        
+        try{
+          // console.log(tutorEducationInfo);
+          await updateNewTutorPrimaryInfo(tmpPrimaryTutorInfo);
+          // console.log(res);
+        }catch(error){}
+
       } catch(error) {
         Swal.fire({
           title: "Update Unsuccessfull",

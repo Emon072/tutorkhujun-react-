@@ -39,6 +39,23 @@ const addTutorPrimaryInfo = (requestConfig) => {
     }
 };
 
+const updateTutorPrimaryApi = (requestConfig) => {
+    const bearerToken = requestConfig.headers.BearerToken;
+    const alreadyLogin = tokenInfoTutor.find(tutor => tutor.token === bearerToken);
+
+    if (alreadyLogin.id !== requestConfig.data.id){
+        return Promise.reject("Authorization Failed");
+    }
+    else {
+        tutorPrimaryInfo = tutorPrimaryInfo.map((tutor) => {
+            if (tutor.id === alreadyLogin.id) return requestConfig.data;
+            return tutor;
+        })
+        write_database("tutor-primary-info", tutorPrimaryInfo);
+        return Promise.resolve(requestConfig.data);
+    }
+}
+
 const getTutorPrimaryInfoApi = (requestConfig) =>{
     const bearerToken = requestConfig.headers.BearerToken;
     const alreadyLogin = tokenInfoTutor.find(tutor => tutor.token === bearerToken);
@@ -88,7 +105,7 @@ const getTutorEducation = (requestConfig) =>{
 const addTutorEducationInfo = (requestConfig) =>{
     const bearerToken = requestConfig.headers.BearerToken;
     const alreadyLogin = tokenInfoTutor.find(tutor => tutor.token === bearerToken);
-    console.log(alreadyLogin);
+    // console.log(alreadyLogin);
 
     if (alreadyLogin.id !== requestConfig.data.id){
         return Promise.reject("Authorization Failed");
@@ -115,7 +132,7 @@ const updateTutorEducationInfo = (requestConfig)=>{
             }
             return tutor;
         });
-        console.log(tutorEducationInfo);
+        // console.log(tutorEducationInfo);
         write_database("tutor-education-info", tutorEducationInfo);
         return Promise.resolve(requestConfig.data);
     }
@@ -186,6 +203,8 @@ export const TutorMockApi = (requestConfig) => {
             return addMockTutor(requestConfig);
         case "/add-tutor-primary":
             return addTutorPrimaryInfo(requestConfig);
+        case "/update-tutor-primary":
+            return updateTutorPrimaryApi(requestConfig);
         case "/get-tutor-primary":
             return getTutorPrimaryInfoApi(requestConfig);
         case "/update-tutor":

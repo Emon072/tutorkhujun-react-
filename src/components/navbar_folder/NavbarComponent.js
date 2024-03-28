@@ -1,13 +1,38 @@
 import React, { useState } from "react";
 import "./NavbarComponent.scss";
 import { Link } from "react-router-dom";
+import useTutorPrimaryProfile from "../Store/TutorPrimaryProfileStore";
+import { useNavigate } from 'react-router-dom';
+
 
 function NavbarComponent({activeLink}) {
   const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
+
+
+  const [showDropMenu, setshowDropMenu] = useState(false);
+
+  const toggleDropMenu = ()=>{
+    if (showDropMenu) setshowDropMenu(false);
+    else setshowDropMenu(true);
+  }
+
+  const gotToProfilePage = () =>{
+    navigate('/t-profile/update');
+  }
+  const pleaseLogOut = () =>{
+    localStorage.setItem("token", "");
+    navigate('/login');
+    setTutorPrimaryInfoToDefaultStore();
+    // setTutorPrimaryInfoStore
+  }
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
+
+  const {tutorPrimaryInfoStore,setTutorPrimaryInfoToDefaultStore} = useTutorPrimaryProfile();
+
 
   return (
     <div className="container-fluid navbar-style">
@@ -35,21 +60,37 @@ function NavbarComponent({activeLink}) {
               </div>
             </div>
           </div>
-          <div className={`col responsive-button-style-nav ${isOpen ? "d-none" : ""}`}>
+
+          {
+            tutorPrimaryInfoStore.profilePicture===""?<div className={`col responsive-button-style-nav ${isOpen ? "d-none" : ""}`}>
             <Link to={'/login'}>
               <button className="btn btn-primary">
                 <i className="fa fa-sign-in fa-lg" style={{ marginRight: "5px" }}></i>
                 Sign in
               </button>
             </Link>
-           <Link to={'/register'}>
-              <button className="btn btn-primary">
-                <i className="fa fa-sign-in fa-lg" style={{ marginRight: "4px" }}></i>{" "}
-                Sign up
-              </button>
-           </Link>
-            
-          </div>
+            <Link to={'/register'}>
+                <button className="btn btn-primary">
+                  <i className="fa fa-sign-in fa-lg" style={{ marginRight: "4px" }}></i>{" "}
+                  Sign up
+                </button>
+            </Link>
+            </div>: <div className="col after-login d-flex justify-content-center align-items-center"> 
+                <img style={{marginRight:'10px'}} src={tutorPrimaryInfoStore.profilePicture} alt="" onClick={toggleDropMenu}></img>
+                <div>{tutorPrimaryInfoStore.tutorName}</div>
+                
+                { showDropMenu && <div className="drop-down-menu">
+                      <p onClick={gotToProfilePage}><i class="fas fa-user"></i> Profile</p>
+                      <p onClick={pleaseLogOut}><i class="fas fa-sign-out-alt"></i> Logout</p>
+                  </div>
+                }
+            </div>
+          }
+
+          
+
+          
+
         </div>
 
         <div className="hamburger col" onClick={toggleMenu}>
