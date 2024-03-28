@@ -1,6 +1,7 @@
 // const jwt = require('jsonwebtoken');
 import { read_database } from "../../mock_database_folder/ReadDatabase";
 import { write_database } from "../../mock_database_folder/WriteDatabase";
+import teacherInfoArr from "../../assets/mockDataset/tutorInfoGen"
 import { uid } from "uid";
 let tutorInfo = [];
 let tokenInfoTutor = [];
@@ -69,6 +70,9 @@ const getTutorPrimaryInfoApi = (requestConfig) =>{
         const primaryInfo = tutorPrimaryInfo.find(tutor => tutor.id === alreadyLogin.id);
         return Promise.resolve(primaryInfo);
     }
+}
+const getAllTutorPrimaryInfoApi = (requestConfig) => {
+    return Promise.resolve([...tutorPrimaryInfo, ...teacherInfoArr])
 }
 
 const updateMockTutor = (requestConfig) => {
@@ -154,6 +158,8 @@ const getTutorTutionApi = (requestConfig)=>{
     }
 }
 
+
+
 const postTutorTutionApi = (requestConfig) =>{
     const bearerToken = requestConfig.headers.BearerToken;
     const alreadyLogin = tokenInfoTutor.find(tutor => tutor.token === bearerToken);
@@ -207,6 +213,8 @@ export const TutorMockApi = (requestConfig) => {
             return updateTutorPrimaryApi(requestConfig);
         case "/get-tutor-primary":
             return getTutorPrimaryInfoApi(requestConfig);
+        case "/get-all-tutor-primary":
+            return getAllTutorPrimaryInfoApi(requestConfig);
         case "/update-tutor":
             return updateMockTutor(requestConfig);
         case "/login-tutor":

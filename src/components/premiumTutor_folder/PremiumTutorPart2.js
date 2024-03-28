@@ -1,18 +1,18 @@
 import React from 'react'
 import './PremiumTutorPart2.scss'
-import teacherInfoArr from '../../assets/mockDataset/tutorInfoGen'
 
-function PremiumTutorPart2() {
+function PremiumTutorPart2(props) {
+    // console.log(allTutorInfo);
     return (
         <div className='premium-part-2'>
-            <div className='title-1'>Showing * Jobs</div>
+            <div className='title-1'>Showing <span style={{fontWeight:'600'}}>{props.allTutorInfo.length}</span> Jobs</div>
             <div className='line'></div>
 
             <div className='text-center premium-tutor-slider' style={{ display: 'flex' }}>
                 <div className='row'>
-                    {teacherInfoArr.map((obj, i) => {
+                    {props.allTutorInfo && props.allTutorInfo.map((obj, i) => {
                         return (
-                            <div key={i} className="col tutor-card tutor-card-view" style={{maxWidth:'280px', margin: '4px' }}>
+                            <div key={i} className="col tutor-card tutor-card-view" style={{maxWidth:'300px', margin: '4px' }}>
 
                                 <div className="text-center for-premium-style">
                                     <img
@@ -23,18 +23,18 @@ function PremiumTutorPart2() {
                                     ></img>
                                 </div>
 
-                                <div className="teacher-name">{obj.name}</div>
+                                <div className="teacher-name">{obj.tutorName}</div>
                                 <div className="teacher-university">
-                                    {obj.university}
+                                    {obj.varsity}
                                 </div>
                                 <div className="teacher-subject">{obj.subject}</div>
                                 <div className="place-style">
                                     <div>
                                         <i
-                                            class="fa-solid fa-location-dot"
+                                            className="fa-solid fa-location-dot"
                                             style={{ marginRight: "3px", color: "red" }}
                                         ></i>
-                                        {obj.tutorLocation}
+                                        {obj.tutionDistrict}
                                     </div>
                                 </div>
                                 <button className="btn btn-1 gradient_bg text-light">

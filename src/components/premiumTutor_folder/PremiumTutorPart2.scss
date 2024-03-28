@@ -17,6 +17,7 @@
       }
   
       .tutor-card-view{
+        background-color: rgb(255, 244, 244);
         .for-premium-style {
           position: relative; /* Add position relative to the parent */
           height: 180px;
@@ -25,7 +26,7 @@
         }
         .for-premium-style img{
           // object-fit: cover;
-          width: 70%;
+          width: 65%;
           height: auto;
           // padding: 10px;
         }
@@ -34,7 +35,7 @@
           content: "PREMIUM";
           position: absolute;
           top: 25px; /* Adjust the position to be on top of the parent */
-          left: -5px; /* Adjust the position as needed */
+          left: 5px; /* Adjust the position as needed */
           height: fit-content;
           width: 150px; /* Adjust the width to control the trapezium's shape */
           // transform: skewX(20deg); /* Adjust the skew angle to create the trapezium */

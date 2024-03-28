@@ -33,6 +33,13 @@ export const getTutorPrimaryInfo = () =>{
     });
 }
 
+export const getAllTutorPrimaryInfo = () => {
+    return tutorAxiosCall({
+        url : "/get-all-tutor-primary",
+        method : "GET",
+    });
+}
+
 export const tutorLogin = (phoneNumber , Inputpassword) =>{
     // console.log(phoneNumber , Inputpassword);
     return tutorAxiosCall({

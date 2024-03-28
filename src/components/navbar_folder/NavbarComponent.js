@@ -53,10 +53,10 @@ function NavbarComponent({activeLink}) {
           <div className={`col-7 ${isOpen ? "d-none" : ""}`}>
             <div className="container-sm">
               <div className="row navbar-responsive-control hover-effect">
-                <div className={`col ${activeLink === 0 ? "active" : ""}`} > <Link to={'/tution-job'}>TUTION JOBS</Link></div>
-                <div className={`col ${activeLink === 1 ? "active" : ""}`} > <Link to={'/tutor-list'}>PREMIUM TUTORS</Link></div>
-                <div className={`col ${activeLink === 2 ? "active" : ""}`} > <Link to={'/tutor-request'}>TUTOR REQUEST</Link></div>
-                <div className={`col ${activeLink === 3 ? "active" : ""}`} > <Link to={'/courses'}>COURSES</Link> </div>
+              <Link className="col" to={'/tution-job'}> <div className={`col ${activeLink === 0 ? "active" : ""}`} > TUTION JOBS</div></Link>
+              <Link className="col" to={'/tutor-list'}><div className={`col ${activeLink === 1 ? "active" : ""}`} > PREMIUM TUTORS</div></Link>
+              <Link className="col" to={'/tutor-request'}><div className={`col ${activeLink === 2 ? "active" : ""}`} > TUTOR REQUEST</div></Link>
+              <Link className="col" to={'/courses'}> <div className={`col ${activeLink === 3 ? "active" : ""}`} > COURSES</div></Link> 
               </div>
             </div>
           </div>

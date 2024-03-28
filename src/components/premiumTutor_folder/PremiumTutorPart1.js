@@ -3,7 +3,7 @@ import './PremiumTutorPart1.scss'
 import { DistrictInfoArr } from "../../assets/mockDataset/DistrictInfo";
 import MediumInfoArr from "../../assets/mockDataset/MediumInfo";
 
-function PremiumTutorPart1() {
+function PremiumTutorPart1(props) {
     const [selectedLocation, setSelectedLocation] = useState("all");
     const [selectGender, setselectGender] = useState("all-gender")
     const [seletedArea, setseletedArea] = useState([]);
@@ -16,6 +16,7 @@ function PremiumTutorPart1() {
     const handleGenderClick = (event) =>{
         // alert('gender')
         setselectGender(event.target.value);
+        
     }
     const handleDivisionClick = (event) => {
       if (event.target.value!=='all')
