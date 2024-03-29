@@ -5,7 +5,7 @@ function PremiumTutorPart2(props) {
     // console.log(allTutorInfo);
     return (
         <div className='premium-part-2'>
-            <div className='title-1'>Showing <span style={{fontWeight:'600'}}>{props.allTutorInfo.length}</span> Jobs</div>
+            <div className='title-1'>Showing <span style={{fontWeight:'600', fontSize:'16px'}}>{props.allTutorInfo.length}</span> tutors</div>
             <div className='line'></div>
 
             <div className='text-center premium-tutor-slider' style={{ display: 'flex' }}>
