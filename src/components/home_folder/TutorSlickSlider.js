@@ -70,9 +70,9 @@ function TutorSlickSlider() {
                 ></img>
               </div>
               
-              <div className="teacher-name">{obj.name}</div>
+              <div className="teacher-name">{obj.tutorName}</div>
               <div className="teacher-university">
-                {obj.university}
+                {obj.varsity}
               </div>
               <div className="teacher-subject">{obj.subject}</div>
               <div className="place-style">
@@ -81,7 +81,7 @@ function TutorSlickSlider() {
                     class="fa-solid fa-location-dot"
                     style={{ marginRight: "3px", color: "red" }}
                   ></i>
-                  {obj.tutorLocation}
+                  {obj.tutionDistrict}
                 </div>
               </div>
               <button className="btn btn-1 gradient_bg text-light">

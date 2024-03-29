@@ -11,8 +11,8 @@ function Home() {
     <>
       < HomePart1/>
       < HomePart2/>
-      {/* < HomePart3/> */}
-      {/* < HomePart4/> */}
+      < HomePart3/> 
+      < HomePart4/>
       < HomePart5/>
     </>
   )

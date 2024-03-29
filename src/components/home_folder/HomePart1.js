@@ -2,6 +2,7 @@ import React from "react";
 import TeacherImage from "../../assets/images/Teacher-rafiki.81362516.svg"; 
 import "./HomePart1.scss";
 import DivisionSlickSlider from "./DivisionSlickSlider";
+import { Link } from "react-router-dom";
 
 function HomePart1() {
   return (
@@ -13,9 +14,9 @@ function HomePart1() {
                 <p className="top-heading">Best <span style={{color:'#3C65F5'}}>Tutoring Platform</span> <br></br>for Home & Online Tutions</p>
                 <div className="font-lg second-heading"> <i className="fa-solid fa-location-dot" style={{marginRight:'10px'}}></i>Find the Right Tutor in Your Area</div>
                 <div style={{cursor:'pointer'}} className="wrap">
-                  <button style={{cursor:'pointer'}} className="button2">
-                    Find a Tutor
-                  </button>
+                <Link to={'/tutor-list'}><button style={{cursor:'pointer'}} className="button2">
+                  Find a Tutor
+                  </button></Link>
                 </div>
                 <div style={{marginTop:'50px', marginRight:'0px'}}>
                   <p style={{color:'grey' , fontSize:'14px'}}>Division Tutors:</p>
