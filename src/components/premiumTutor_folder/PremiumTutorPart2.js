@@ -15,12 +15,15 @@ function PremiumTutorPart2(props) {
                             <div key={i} className="col tutor-card tutor-card-view" style={{maxWidth:'300px', margin: '4px' }}>
 
                                 <div className="text-center for-premium-style">
-                                    <img
-                                        className="teacher-style"
-                                        src={obj.profilePicture}
-                                        alt="teacher"
-                                        style={{ display: "block", margin: "0 auto" }} // Centering image
-                                    ></img>
+                                    <div className= {obj.isPremium ? "activate": ""}>
+                                        <img
+                                            className="teacher-style"
+                                            src={obj.profilePicture}
+                                            alt="teacher"
+                                            style={{ display: "block", margin: "0 auto" }} // Centering image
+                                        ></img>
+                                    </div>
+                                  
                                 </div>
 
                                 <div className="teacher-name">{obj.tutorName}</div>

@@ -31,20 +31,25 @@
           // padding: 10px;
         }
         
-        .for-premium-style:before {
-          content: "PREMIUM";
-          position: absolute;
-          top: 25px; /* Adjust the position to be on top of the parent */
-          left: 5px; /* Adjust the position as needed */
-          height: fit-content;
-          width: 150px; /* Adjust the width to control the trapezium's shape */
-          // transform: skewX(20deg); /* Adjust the skew angle to create the trapezium */
-          transform: rotate(-45deg);
-          color: white;
-          background: linear-gradient(90deg, #540654, #cc0d85 50%, #540654 100%, #00d4ff 0);
-          padding: 3px 20px;
-          clip-path: polygon(0% 100%, 100% 100%, 80% 0%, 20% 0%);
-      }
+        .for-premium-style {
+          .activate:before {
+            content: "PREMIUM";
+            position: absolute;
+            top: 25px; /* Adjust the position to be on top of the parent */
+            left: 5px; /* Adjust the position as needed */
+            height: fit-content;
+            width: 150px; /* Adjust the width to control the trapezium's shape */
+            // transform: skewX(20deg); /* Adjust the skew angle to create the trapezium */
+            transform: rotate(-45deg);
+            color: white;
+            background: linear-gradient(90deg, #540654, #cc0d85 50%, #540654 100%, #00d4ff 0);
+            padding: 3px 20px;
+            clip-path: polygon(0% 100%, 100% 100%, 80% 0%, 20% 0%);
+          }
+        }
+          
+      
+
       
         .teacher-name{
             font-size: 20px;

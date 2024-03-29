@@ -38,7 +38,8 @@ class Tutor {
   
  // Function to generate random data
 function generateRandomTutor() {
-    const names = ['John Doe', 'Jane Smith', 'Michael Johnson', 'Emily Brown', 'David Wilson'];
+    const maleNames = ["James", "John", "Robert", "Michael", "William", "David", "Richard", "Joseph", "Charles", "Thomas", "Christopher", "Daniel", "Matthew", "Anthony", "Mark", "Donald", "Steven", "Paul", "Andrew", "Kenneth"];
+    const femaleNames = ["Mary", "Jennifer", "Linda", "Patricia", "Elizabeth", "Susan", "Jessica", "Sarah", "Karen", "Nancy", "Margaret", "Lisa", "Betty", "Dorothy", "Sandra", "Ashley", "Kimberly", "Emily", "Donna", "Michelle"];
     const genders = ['Male', 'Female'];
     const emails = ['one@gmail.com', 'two@gmail.com', 'three@gmail.com']
     const phones = ['01791290951', '01612807072', '01756435421', '01314563456', '01831231276']
@@ -47,10 +48,9 @@ function generateRandomTutor() {
     const premium = [true , false];
   
     
-    
   
-    const randomName = names[Math.floor(Math.random() * names.length)];
     const randomGender = genders[Math.floor(Math.random() * genders.length)];
+    const randomName = randomGender === 'Male' ? maleNames[Math.floor(Math.random()*maleNames.length)] : femaleNames[Math.floor(Math.random()*femaleNames.length)];
     const randomEmail = emails[Math.floor(Math.random() * emails.length)];
     const randomPhone = phones[Math.floor(Math.random() * phones.length)];
     const randomDistrict = Math.floor(Math.random() * DistrictInfoArr.length);
@@ -65,8 +65,13 @@ function generateRandomTutor() {
     for (let i = 1; i <= 100; i++) {
         imageUrls.push(`https://randomuser.me/api/portraits/men/${i}.jpg`);
     }
+
+    const femaleImageUrls = [];
+    for (let i = 1; i <= 100; i++) {
+      femaleImageUrls.push(`https://randomuser.me/api/portraits/women/${i}.jpg`);
+  }
   
-    const randomImageUrl = imageUrls[Math.floor(Math.random() * imageUrls.length)];
+    const randomImageUrl = randomGender === 'Male' ? imageUrls[Math.floor(Math.random() * imageUrls.length)] : femaleImageUrls[Math.floor(Math.random() * femaleImageUrls.length)] ;
   
     return new Tutor(
       "TS-"+ Math.floor(Math.random *1000),
@@ -75,7 +80,7 @@ function generateRandomTutor() {
       randomEmail,
       randomPhone,
       DistrictInfoArr[randomDistrict].district,
-      DistrictInfoArr[randomDistrict].area[Math.floor(Math.random() * DistrictInfoArr[randomDistrict].area.length)],
+      [DistrictInfoArr[randomDistrict].area[Math.floor(Math.random() * DistrictInfoArr[randomDistrict].area.length)]],
       randomImageUrl,
       randomVarsity,
       randomSubject,
