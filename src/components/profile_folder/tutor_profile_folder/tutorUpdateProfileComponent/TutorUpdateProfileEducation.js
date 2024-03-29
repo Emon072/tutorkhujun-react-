@@ -5,6 +5,7 @@ import { getTutorPrimaryInfo, updateNewTutorPrimaryInfo } from '../../../../api/
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
 import useTutorPrimaryProfile from '../../../Store/TutorPrimaryProfileStore';
+import { write_database } from '../../../../mock_database_folder/WriteDatabase';
 
 function TutorUpdateProfileEducation() {
 
@@ -61,6 +62,7 @@ function TutorUpdateProfileEducation() {
   const callGetTutorPrimaryInfo = async() =>{
     try{
       const res = await getTutorPrimaryInfo();
+      write_database("tem-primary-info" , res);
 
       setTutorPrimaryInfoStore(res);
 

@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState , useEffect} from "react";
 import "./NavbarComponent.scss";
 import { Link } from "react-router-dom";
 import useTutorPrimaryProfile from "../Store/TutorPrimaryProfileStore";
 import { useNavigate } from 'react-router-dom';
+import { read_database } from "../../mock_database_folder/ReadDatabase";
 
 
 function NavbarComponent({activeLink}) {
@@ -22,17 +23,31 @@ function NavbarComponent({activeLink}) {
   }
   const pleaseLogOut = () =>{
     localStorage.setItem("token", "");
+    localStorage.setItem("tem-primary-info" , "");
     navigate('/login');
     setTutorPrimaryInfoToDefaultStore();
     // setTutorPrimaryInfoStore
   }
 
+  
+  
+
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
 
-  const {tutorPrimaryInfoStore,setTutorPrimaryInfoToDefaultStore} = useTutorPrimaryProfile();
+  const {tutorPrimaryInfoStore,setTutorPrimaryInfoToDefaultStore, setTutorPrimaryInfoStore} = useTutorPrimaryProfile();
 
+  useEffect(() => {
+    const tmpPrimaryTutorInfo  = read_database("tem-primary-info");
+    
+    if (!tmpPrimaryTutorInfo!==""){
+      // console.log(tmpPrimaryTutorInfo);
+      setTutorPrimaryInfoStore(tmpPrimaryTutorInfo);
+      // console.log(tutorPrimaryInfoStore);
+    }
+    
+  }, [])
 
   return (
     <div className="container-fluid navbar-style">
@@ -62,7 +77,7 @@ function NavbarComponent({activeLink}) {
           </div>
 
           {
-            tutorPrimaryInfoStore.profilePicture===""?<div className={`col responsive-button-style-nav ${isOpen ? "d-none" : ""}`}>
+            !tutorPrimaryInfoStore.profilePicture?<div className={`col responsive-button-style-nav ${isOpen ? "d-none" : ""}`}>
             <Link to={'/login'}>
               <button className="btn btn-primary">
                 <i className="fa fa-sign-in fa-lg" style={{ marginRight: "5px" }}></i>
