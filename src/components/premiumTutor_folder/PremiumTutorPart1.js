@@ -8,6 +8,7 @@ function PremiumTutorPart1(props) {
 
     const {tutorFilterInfo, updateTutorFilterInfo} = usePremiumTutorFilter();
 
+
     const [selectedTutorType, setselectedTutorType] = useState("all");
     const [selectGender, setselectGender] = useState("all-gender")
     const [seletedArea, setseletedArea] = useState([]);

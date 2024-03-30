@@ -2,29 +2,52 @@ import React, { useState } from "react";
 import "./TutionJobPart1.scss";
 import { DistrictInfoArr } from "../../assets/mockDataset/DistrictInfo";
 import MediumInfoArr from "../../assets/mockDataset/MediumInfo";
+import useJobFilter from "../Store/student/JobFilter";
 
 function TutionJobpart1() {
-  const [selectedLocation, setSelectedLocation] = useState("all");
-  const [selectGender, setselectGender] = useState("all-gender")
+
+  const {jobFilterInfo, updateJobFilterInfo} = useJobFilter();
+
+  const [seletecTutorType, setseletecTutorType] = useState("");
+  const [selectGender, setselectGender] = useState("")
   const [seletedArea, setseletedArea] = useState([]);
   const [selectedClasses, setselectedClasses] = useState([]);
 
-  const handleLocationClick = (event) => {
-    setSelectedLocation(event.target.value);
+  
+
+  const handleTutionType = (event) => {
+    updateJobFilterInfo({...jobFilterInfo , TutionType: event.target.value});
+    setseletecTutorType(event.target.value);
   };
   const handleGenderSelect = (event) =>{
+    updateJobFilterInfo({...jobFilterInfo , tutorGender: event.target.value});
     setselectGender(event.target.value);
   }
   const handleDivisionClick = (event) => {
-    if (event.target.value!=='all')
-        setseletedArea(DistrictInfoArr[event.target.value].area);
+    if (event.target.value!==''){
+      setseletedArea(DistrictInfoArr[event.target.value].area);
+      updateJobFilterInfo({...jobFilterInfo , tutordistrict: DistrictInfoArr[event.target.value].district});
+    }
+    else{
+      updateJobFilterInfo({...jobFilterInfo , tutordistrict : ""});
+    }
   };
-  const handleAreaClick = (event) => {};
+
+  const handleAreaClick = (event) => {
+    updateJobFilterInfo({...jobFilterInfo , tutorArea: event.target.value});
+  };
   const handleMediumClick = (event) => {
-    if (event.target.value!=='all')
-     setselectedClasses(MediumInfoArr[event.target.value].classes);
+    if (event.target.value!==''){
+      updateJobFilterInfo({...jobFilterInfo , tutorMedium: MediumInfoArr[event.target.value].medium})
+      setselectedClasses(MediumInfoArr[event.target.value].classes);
+    }
+    else{
+      updateJobFilterInfo({...jobFilterInfo , tutorMedium : ""});
+    }
   };
-  const handleClassClick = (event) => {};
+  const handleClassClick = (event) => {
+    updateJobFilterInfo({...jobFilterInfo , tutorClass: event.target.value});
+  };
 
   return (
     <div className="part-1-style">
@@ -40,10 +63,10 @@ function TutionJobpart1() {
             <p>All Tution</p>
             <input
               type="radio"
-              value="all"
-              name="all"
-              onClick={handleLocationClick}
-              checked={selectedLocation === "all"}
+              value=""
+              name=""
+              onClick={handleTutionType}
+              checked={seletecTutorType === ""}
             />
             <span className="checkmark"></span>
           </label>
@@ -52,10 +75,10 @@ function TutionJobpart1() {
             <p>Home Tution</p>
             <input
               type="radio"
-              name="home"
-              value="home"
-              onClick={handleLocationClick}
-              checked={selectedLocation === "home"}
+              name="Home Tutoring"
+              value="Home Tutoring"
+              onClick={handleTutionType}
+              checked={seletecTutorType === "Home Tutoring"}
             />
             <span className="checkmark"></span>
           </label>
@@ -64,10 +87,10 @@ function TutionJobpart1() {
             <p>Online Tution</p>
             <input
               type="radio"
-              name="online"
-              value="online"
-              onClick={handleLocationClick}
-              checked={selectedLocation === "online"}
+              name="Online Tutoring"
+              value="Online Tutoring"
+              onClick={handleTutionType}
+              checked={seletecTutorType === "Online Tutoring"}
             />
             <span className="checkmark"></span>
           </label>
@@ -90,10 +113,10 @@ function TutionJobpart1() {
             <p>All</p>
             <input
               type="radio"
-              value="all-gender"
-              name="all-gender"
+              value=""
+              name=""
               onClick={handleGenderSelect}
-              checked={selectGender === "all-gender"}
+              checked={selectGender === ""}
             />
             <span className="checkmark"></span>
           </label>
@@ -102,10 +125,10 @@ function TutionJobpart1() {
             <p>Male</p>
             <input
               type="radio"
-              name="male"
-              value="male"
+              name="Male"
+              value="Male"
               onClick={handleGenderSelect}
-              checked={selectGender === "male"}
+              checked={selectGender === "Male"}
             />
             <span className="checkmark"></span>
           </label>
@@ -114,10 +137,10 @@ function TutionJobpart1() {
             <p>Female</p>
             <input
               type="radio"
-              name="female"
-              value="female"
+              name="Female"
+              value="Female"
               onClick={handleGenderSelect}
-              checked={selectGender === "female"}
+              checked={selectGender === "Female"}
             />
             <span className="checkmark"></span>
           </label>
@@ -134,7 +157,7 @@ function TutionJobpart1() {
       <div className="title-2">Select District</div>
 
       <select class="form-select" onChange={handleDivisionClick}>
-        <option selected value={"all"}>
+        <option selected value={""}>
           All
         </option>
         {
@@ -154,12 +177,12 @@ function TutionJobpart1() {
       <div className="title-2">Select Area</div>
 
       <select className="form-select" onChange={handleAreaClick}>
-        <option selected value={"all"}>
+        <option selected value={""}>
           All
         </option>
         {seletedArea.map((area, i) => {
           return (
-            <option key={i} value={i}>
+            <option key={i} value={area}>
               {area}
             </option>
           );
@@ -171,7 +194,7 @@ function TutionJobpart1() {
       <div className="title-2">Select Medium</div>
 
       <select className="form-select" onChange={handleMediumClick}>
-        <option selected value={"all"}>
+        <option selected value={""}>
           All
         </option>
         {MediumInfoArr.map((medium, i) => {
@@ -188,13 +211,13 @@ function TutionJobpart1() {
       <div className="title-2">Select Class</div>
 
       <select className="form-select" onChange={handleClassClick}>
-        <option selected value={"all"}>
+        <option selected value={""}>
           All
         </option>
-        {selectedClasses.map((area, i) => {
+        {selectedClasses.map((classes, i) => {
           return (
-            <option key={i} value={i}>
-              {area}
+            <option key={i} value={classes}>
+              {classes}
             </option>
           );
         })}

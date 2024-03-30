@@ -69,9 +69,9 @@ function PremiumTutor(props) {
     <>
       <NavbarComponent activeLink={props.activeLink}></NavbarComponent>
       <div className='container-xl' style={{marginBottom:'100px'}}>
-        <div className='row' style={{margin:'0px 15px'}}>
-            <div className='col-3' ><PremiumTutorPart1 /></div>
-            <div className='col-9' ><PremiumTutorPart2 allTutorInfo = {filteredTutorInfoArr} /></div>
+        <div className='row' style={{margin:'0px 15px', position:'relative'}}>
+            <div className='col-3' style={{height:'fit-content'}}><PremiumTutorPart1 /></div>
+            <div className='col-9' style={{height:'810px' , overflow: 'scroll', scrollbarWidth:'none' }} ><PremiumTutorPart2 allTutorInfo = {filteredTutorInfoArr} /></div>
         </div>
       </div>
     </>
