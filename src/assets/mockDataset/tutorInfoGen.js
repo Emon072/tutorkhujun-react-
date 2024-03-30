@@ -74,7 +74,7 @@ function generateRandomTutor() {
     const randomImageUrl = randomGender === 'Male' ? imageUrls[Math.floor(Math.random() * imageUrls.length)] : femaleImageUrls[Math.floor(Math.random() * femaleImageUrls.length)] ;
   
     return new Tutor(
-      "TS-"+ Math.floor(Math.random *1000),
+      "TS-"+ Math.floor(Math.random() *1000)+100,
       randomName,
       randomGender,
       randomEmail,

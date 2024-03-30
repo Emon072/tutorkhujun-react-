@@ -1,11 +1,29 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./TutorSlickSlider.scss"; // Import your CSS file for component styling
-import teacherInfoArr from "../../assets/mockDataset/tutorInfoGen";
+import { getAllTutorPrimaryInfo } from "../../api/tutor_api/registerTutorApi";
+import { useNavigate } from "react-router-dom";
 
 function TutorSlickSlider() {
+
+  const [teacherInfoArr, setteacherInfoArr] = useState([]);
+  const navigate = useNavigate();
+
+  const getTutorInfomation = async()=>{
+    const res = await getAllTutorPrimaryInfo();
+    setteacherInfoArr(res);
+  }
+
+  useEffect(() => {
+    getTutorInfomation();
+  }, [])
+
+  const goToProfileInfo = (id) =>{
+    navigate(`/tutor-details/${id}`);
+  }
+
   var settings = {
     dots: false,
     infinite: false,
@@ -84,7 +102,7 @@ function TutorSlickSlider() {
                   {obj.tutionDistrict}
                 </div>
               </div>
-              <button className="btn btn-1 gradient_bg text-light">
+              <button className="btn btn-1 gradient_bg text-light" onClick={()=>goToProfileInfo(obj.id)}>
                 View Details
               </button>
             </div>
