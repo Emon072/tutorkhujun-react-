@@ -18,3 +18,18 @@ export const logInStudent = (phone , password) =>{
         data : {phone : phone , password : password}
     });
 }
+
+export const getAllJobInfo = () =>{
+    return studentAxiosCall({
+        url : "/all-job",
+        method : "GET",
+    })
+}
+
+export const getSingleJobInfo = (id) =>{
+    return studentAxiosCall({
+        url : "/single-job",
+        method : "GET",
+        data : id,
+    })
+}

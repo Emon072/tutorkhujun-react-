@@ -1,8 +1,11 @@
 import { uid } from "uid";
 import { read_database } from "../../mock_database_folder/ReadDatabase"
 import { write_database } from "../../mock_database_folder/WriteDatabase";
+import jobInfoArr from "../../assets/mockDataset/student/jobInfoGen";
+
 let studentInfo = [];
 let tokenInfoStudent = [];
+
 
 const addNewStudent = (requestConfig) => {
     const existingStudent = studentInfo.find((student) => student.phone === requestConfig.data.phone);
@@ -34,6 +37,16 @@ const loginStudentApi = (requestConfig) => {
     }
 }
 
+const getAllJobInfoApi = (requestConfig) => {
+    // alert("here")
+    // console.log(jobInfoArr)
+    return Promise.resolve(jobInfoArr);
+}
+const getSingleJobInfoApi = (requestConfig) =>{
+    const job = jobInfoArr.find((job) => job.jobId === requestConfig.data);
+    return Promise.resolve(job);
+}
+
 export const StudentMockApi = (requestConfig) => {
 
     // console.log(requestConfig)
@@ -45,6 +58,10 @@ export const StudentMockApi = (requestConfig) => {
             return addNewStudent(requestConfig);
         case "/loing-student":
             return loginStudentApi(requestConfig);
+        case "/all-job":
+            return getAllJobInfoApi(requestConfig);
+        case "/single-job":
+            return getSingleJobInfoApi(requestConfig);
         default:
             break;
     }

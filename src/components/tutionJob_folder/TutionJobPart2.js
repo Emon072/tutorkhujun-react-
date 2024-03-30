@@ -1,5 +1,6 @@
 import React from 'react'
 import './TutionJobPart2.scss'
+import { useNavigate } from 'react-router-dom';
 
 function TutionJobPart2({jobInfoArr}) {
 
@@ -20,6 +21,11 @@ function TutionJobPart2({jobInfoArr}) {
     } else {
       return `${seconds} second${seconds !== 1 ? 's' : ''} ago`;
     }
+  }
+  const navigate = useNavigate();
+
+  const goToJobDetails = (id)=>{
+    navigate(`/job-details/${id}`);
   }
 
   return (
@@ -56,7 +62,7 @@ function TutionJobPart2({jobInfoArr}) {
                             <div className='col-3' style={{color:'#1089AD'}}>Other Requirements : </div>
                             <div className='col-7'style={{ marginRight:'-10px'}}>  {job.otherRequirements}</div>
                             <div className='col'>
-                                <button className="btn btn-1 gradient_bg text-light">
+                                <button className="btn btn-1 gradient_bg text-light" onClick={()=>goToJobDetails(job.jobId)}>
                                     View Details
                                 </button>
                             </div>

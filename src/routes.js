@@ -9,6 +9,7 @@ import RegisterComponent from "./components/register_folder/RegisterComponent";
 import TutorUpdateProfile from "./components/profile_folder/tutor_profile_folder/tutorUpdateProfileComponent/TutorUpdateProfile";
 import StudentProfile from "./components/profile_folder/Student_profile_folder/StudentProfile"
 import TutorDetails from "./components/tutor_details_folder/TutorDetails";
+import JobDetails from "./components/job_details_folder/JobDetails";
 export const routes = createBrowserRouter([
     {
         path: "/",
@@ -49,5 +50,9 @@ export const routes = createBrowserRouter([
     {
         path: "/tutor-details/:id",
         element: <TutorDetails dashboard = {3} activeLink={5}/>,
+    },
+    {
+        path: "/job-details/:id",
+        element: <JobDetails dashboard = {3} activeLink={5}/>,
     },
 ]);

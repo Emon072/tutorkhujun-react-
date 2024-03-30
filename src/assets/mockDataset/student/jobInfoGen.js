@@ -110,7 +110,7 @@ function generateRandomJob(){
 
     return new Job(
         "ST-" + (Math.floor(Math.random() * 1000) + 100),
-        "JB-"+ (Math.floor(Math.random() * 1000) + 1000),
+        "JB-"+ (Math.floor(Math.random() * 1000)),
         randomGender,
         MediumInfoArr[randomMedium].medium,
         MediumInfoArr[randomMedium].classes[Math.floor(Math.random() * MediumInfoArr[randomMedium].classes.length)],
@@ -128,6 +128,6 @@ function generateRandomJob(){
     );
 }
 
-const jobInfoArr = Array.from({ length : 100 }, () => generateRandomJob());
+const jobInfoArr = Array.from({ length : 300 }, () => generateRandomJob());
 
 export default jobInfoArr;

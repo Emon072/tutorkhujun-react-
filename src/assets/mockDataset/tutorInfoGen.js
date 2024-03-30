@@ -74,7 +74,7 @@ function generateRandomTutor() {
     const randomImageUrl = randomGender === 'Male' ? imageUrls[Math.floor(Math.random() * imageUrls.length)] : femaleImageUrls[Math.floor(Math.random() * femaleImageUrls.length)] ;
   
     return new Tutor(
-      "TS-"+ Math.floor(Math.random() *1000)+100,
+      "TS-"+ Math.floor(Math.random() *1000)+400,
       randomName,
       randomGender,
       randomEmail,
@@ -91,7 +91,7 @@ function generateRandomTutor() {
     );
   }
   // Generating 20 mock data arrays
-  const teacherInfoArr = Array.from({ length: 100 }, () => generateRandomTutor());
+  const teacherInfoArr = Array.from({ length: 300 }, () => generateRandomTutor());
   // console.log(teacherInfoArr);
 //   console.log(mockData);
 export default  teacherInfoArr;
