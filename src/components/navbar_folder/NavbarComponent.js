@@ -90,8 +90,8 @@ function NavbarComponent({activeLink}) {
                   Sign up
                 </button>
             </Link>
-            </div>: <div className="col after-login d-flex justify-content-center align-items-center"> 
-                <img style={{marginRight:'10px'}} src={tutorPrimaryInfoStore.profilePicture} alt="" onClick={toggleDropMenu}></img>
+            </div>: <div onClick={toggleDropMenu} className="col after-login d-flex justify-content-center align-items-center"> 
+                <img style={{marginRight:'10px'}} src={tutorPrimaryInfoStore.profilePicture} alt="" ></img>
                 <div>{tutorPrimaryInfoStore.tutorName}</div>
                 
                 { showDropMenu && <div className="drop-down-menu">

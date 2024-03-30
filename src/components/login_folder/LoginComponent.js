@@ -5,9 +5,10 @@ import loginSvg from "../../assets/images/Computer login-amico.58fc4aa2.svg";
 import { Link, useNavigate } from "react-router-dom";
 import { tutorLogin } from "../../api/tutor_api/registerTutorApi";
 import Swal from 'sweetalert2'
+import { logInStudent } from "../../api/student_api/RegisterStudentApi";
 
 function LoginComponent(props) {
-  const [setLoginType, setsetLoginType] = useState("tutor");
+  const [setLoginType, setsetLoginType] = useState("student");
   const [phoneNumber, setphoneNumber] = useState();
   const [password, setpassword] = useState("");
   const navigate = useNavigate();
@@ -36,12 +37,32 @@ function LoginComponent(props) {
       });
     }
   }
+
+  const studentLoginControl = async (phoneNumber , password) => {
+    try{
+      const response = await logInStudent(phoneNumber , password);
+      localStorage.setItem("token" , response.token);
+      localStorage.setItem("student" , 1);
+      Swal.fire({
+        title: "Login successfully",
+        icon: "success"
+      });
+      navigate('/s-profile');
+    } catch (error) {
+      Swal.fire({
+        title: "Operation Unsuccessful",
+        text: "Can not added because of " + error,
+        icon: "error"
+      });
+    }
+  }
+
   const handleLogin = ()=>{
     if (setLoginType==="tutor"){
       tutorLoginControl(phoneNumber , password);
     }
     else{
-      // login logic for student
+      studentLoginControl(phoneNumber , password);
     }
   }
 

@@ -109,8 +109,8 @@ function generateRandomJob(){
     const randomTutoring = tutoringType[Math.floor(Math.random() * tutoringType.length)];
 
     return new Job(
-        "St-" + (Math.floor(Math.random() * 1000) + 100),
-        "Jb-"+ (Math.floor(Math.random() * 1000) + 1000),
+        "ST-" + (Math.floor(Math.random() * 1000) + 100),
+        "JB-"+ (Math.floor(Math.random() * 1000) + 1000),
         randomGender,
         MediumInfoArr[randomMedium].medium,
         MediumInfoArr[randomMedium].classes[Math.floor(Math.random() * MediumInfoArr[randomMedium].classes.length)],

@@ -1,0 +1,93 @@
+.tutor-details{
+    margin-bottom: 100px;
+    .title-1{
+        font-size: 23px;
+        font-weight: 600;
+        margin-top: 20px;
+    }
+    .line{
+        height: 2px;
+        width: 200px;
+        background-color:rgb(138, 36, 36);
+    }
+    img {
+        height: 100%;
+    }
+    .tutor-card {
+        border-radius: 10px; /* Rounded corners */
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Box shadow for depth */
+        margin-top: 20px;
+        /* Card spacing and layout */
+        padding: 20px; /* Padding inside the card */
+        background-color: #fff; /* Background color of the card */
+        
+        .partition{
+            background-color: purple;
+            padding: 20px 20px;
+            width: 100%;
+            font-size: 18px;
+            color: white;
+            margin-top: 30px;
+        }
+        .divider{
+            height: 1px;
+            width: 100%;
+            background-color: gray;
+            margin: 20px 0px;
+        }
+        .second-part{
+            font-size: larger;
+            font-style: normal;
+            color: rgb(19, 19, 19);
+            .row{
+                margin-top: 20px;
+            }
+        }
+        .col-3{
+            color: purple;
+        }
+        
+    }
+    .title-last{
+        margin-top: 50px;
+        font-size: 25px;
+        font-weight: 600;
+        color: #05264E;
+    }
+
+    table, th, td {
+        border: 1px solid rgb(195, 192, 192);
+        font-size: 18px;
+        padding: 10px 0px;
+      }
+
+    table{
+        // border: 1px solid black;
+        border-collapse:collapse;
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    .table-heading-style{
+        background-color: purple;
+        color: white;
+    }
+
+    .title-2{
+        font-size: 21px;
+        font-weight: 600;
+        margin-top: 30px;
+        color: black;
+    }
+    .side-text{
+        // line-height: 30px;
+        margin-left: 20px;
+        color: black;
+        font-size: 18px;
+
+        .row{
+            margin: 10px 0px;
+        }
+    }
+    
+}

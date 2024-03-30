@@ -71,8 +71,22 @@ const getTutorPrimaryInfoApi = (requestConfig) =>{
         return Promise.resolve(primaryInfo);
     }
 }
+const getSingleTutorPrimaryInfoApi = (requestConfig) =>{
+    if (tutorPrimaryInfo.length<10){
+        tutorPrimaryInfo = [...tutorPrimaryInfo, ...teacherInfoArr]
+    }
+    // console.log(requestConfig.data);
+    const res = tutorPrimaryInfo.find((tutor) => tutor.id === requestConfig.data);
+    return Promise.resolve(res);
+}
+
 const getAllTutorPrimaryInfoApi = (requestConfig) => {
-    return Promise.resolve([...tutorPrimaryInfo, ...teacherInfoArr])
+    if (tutorPrimaryInfo.length<10){
+
+        tutorPrimaryInfo = [...tutorPrimaryInfo, ...teacherInfoArr]
+    }
+
+    return Promise.resolve(tutorPrimaryInfo)
 }
 
 const updateMockTutor = (requestConfig) => {
@@ -213,6 +227,8 @@ export const TutorMockApi = (requestConfig) => {
             return updateTutorPrimaryApi(requestConfig);
         case "/get-tutor-primary":
             return getTutorPrimaryInfoApi(requestConfig);
+        case "/get-single-tutor-primary":
+            return getSingleTutorPrimaryInfoApi(requestConfig);
         case "/get-all-tutor-primary":
             return getAllTutorPrimaryInfoApi(requestConfig);
         case "/update-tutor":

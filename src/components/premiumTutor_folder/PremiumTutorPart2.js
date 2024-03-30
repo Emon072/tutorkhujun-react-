@@ -1,8 +1,15 @@
-import React from 'react'
-import './PremiumTutorPart2.scss'
+import React from 'react';
+import './PremiumTutorPart2.scss';
+import { useNavigate } from 'react-router-dom';
 
 function PremiumTutorPart2(props) {
-    // console.log(allTutorInfo);
+    const navigate = useNavigate();
+
+    const goToTutorProfile = (id) => {
+        // console.log(id);
+        navigate(`/tutor-details/${id}`);
+    };
+
     return (
         <div className='premium-part-2'>
             <div className='title-1'>Showing <span style={{fontWeight:'600', fontSize:'16px'}}>{props.allTutorInfo.length}</span> tutors</div>
@@ -15,7 +22,7 @@ function PremiumTutorPart2(props) {
                             <div key={i} className="col tutor-card tutor-card-view" style={{maxWidth:'300px', margin: '4px' }}>
 
                                 <div className="text-center for-premium-style">
-                                    <div className= {obj.isPremium ? "activate": ""}>
+                                    <div className={obj.isPremium ? "activate" : ""}>
                                         <img
                                             className="teacher-style"
                                             src={obj.profilePicture}
@@ -40,7 +47,7 @@ function PremiumTutorPart2(props) {
                                         {obj.tutionDistrict}
                                     </div>
                                 </div>
-                                <button className="btn btn-1 gradient_bg text-light">
+                                <button className="btn btn-1 gradient_bg text-light" onClick={() => goToTutorProfile(obj.id)}>
                                     View Details
                                 </button>
                             </div>
@@ -49,13 +56,8 @@ function PremiumTutorPart2(props) {
                     })}
                 </div>
             </div>
-
-
-
-
         </div>
-
-    )
+    );
 }
 
-export default PremiumTutorPart2
+export default PremiumTutorPart2;

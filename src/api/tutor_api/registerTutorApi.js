@@ -9,6 +9,7 @@ export const registerNewTutorLogin = (tutor) => {
     });
 }
 
+
 export const registerNewTutorPrimaryInfo = (tutorPrimaryInfo) => {
 
     return tutorCallApi({
@@ -30,6 +31,14 @@ export const getTutorPrimaryInfo = () =>{
     return tutorCallApi({
         url : "/get-tutor-primary",
         method : "GET",
+    });
+}
+
+export const getSingleTutorPrimaryInfo = (id) =>{
+    return tutorAxiosCall({
+        url : "/get-single-tutor-primary",
+        method : "GET",
+        data : id,
     });
 }
 
