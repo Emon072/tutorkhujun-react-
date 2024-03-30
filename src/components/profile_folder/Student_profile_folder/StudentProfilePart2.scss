@@ -1,0 +1,85 @@
+.request-part{
+    .card-view{
+        border: 1px solid grey;
+        width: fit-content;
+        border-radius: 10px;
+
+        .title-1{
+            margin: 15px 0px;
+            color: #05264E;
+            font-size: 22px;
+            font-weight: 600;
+        }
+        .title-2{
+            color: #05264E;
+            font-size: 15px;
+            font-weight: 600;
+            margin: 7px 0px;
+        }
+        .title-3{
+            margin: 5px 0px;
+            color: rgb(91, 91, 91);
+        }
+    }
+    .part-1{
+        .title-1{
+            margin: 20px 0px;
+            color: #05264E;
+            font-size: 38px;
+            font-weight: 600;
+        }
+        .title-2{
+            color: rgb(122, 121, 121);
+        }
+    }
+    .input-style >div{
+        margin: 20px 0px;
+    }
+    .input-style select {
+        margin-bottom: 20px;
+    }
+    .input-style label{
+        margin: 8px 0px;
+        color: rgb(58, 58, 58);
+    }
+
+    .submit-button-request{
+        .gradient_bg {
+            background: linear-gradient(90deg, #540654, #cc0d85 50%, #540654 100%, #00d4ff 0);
+        }
+        .text-light {
+            color: #f8f9fa !important;
+        }
+        .btn-1:before {
+          content: "";
+          position: absolute;
+          height: 150px;
+          width: 50px;
+          background: #ffffff;
+          left: -55px;
+          top: -40px;
+          transform: rotate(37deg);
+          transition: all 0.3s ease; /* Specify the timing function */
+          opacity: 0.3; /* The correct value for opacity */
+          box-sizing: border-box;
+        }
+      
+        .btn:hover::before {
+          left: 180px;
+        }
+    
+        .btn-1 {
+            padding: 7px 60px;
+            margin: 20px 0px;
+            text-align: center;
+            display: inline-block;
+            border: 1px solid #fff;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+    }
+    
+    
+
+}
