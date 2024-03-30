@@ -282,7 +282,7 @@ function TutorUpdateProfileEducation() {
 
           <div className='col-3'>Curriculum</div>
           <div className='col-9'>
-            <select class="form-select" name="hsc-curriculum" value={tutorEducationInfo.sscCurriculum} onChange={handleOnChange}>
+            <select class="form-select" name="hsc-curriculum" value={tutorEducationInfo.hscCurriculum} onChange={handleOnChange}>
               <option selected value={""}>Select One</option>
               <option value={"bangla"}>Bangla</option>
               <option value={"english"}>English</option>

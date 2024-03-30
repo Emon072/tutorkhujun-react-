@@ -19,6 +19,7 @@ function NavbarComponent({activeLink}) {
   }
 
   const gotToProfilePage = () =>{
+    // alert(localStorage.getItem("student"));
     navigate('/t-profile/update');
   }
   const pleaseLogOut = () =>{

@@ -1,13 +1,18 @@
 import React from 'react'
 import StudentProfilePart1 from './StudentProfilePart1'
 import StudentProfilePart2 from './StudentProfilePart2'
+import NavbarComponent from "../../navbar_folder/NavbarComponent.js"
 
 function StudentProfile() {
   return (
-    <div style={{marginLeft:'20px'}}>
-        <StudentProfilePart1></StudentProfilePart1>
-        <StudentProfilePart2></StudentProfilePart2>
-    </div>
+    <>
+      <NavbarComponent></NavbarComponent>
+      <div style={{marginLeft:'20px'}}>
+          <StudentProfilePart1></StudentProfilePart1>
+          <StudentProfilePart2></StudentProfilePart2>
+      </div>
+    </>
+    
   )
 }
 
