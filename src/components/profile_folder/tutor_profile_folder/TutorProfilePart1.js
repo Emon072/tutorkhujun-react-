@@ -12,8 +12,8 @@ function TutorProfilePart1({ dashboard }) {
                 <img src= {tutorPrimaryInfoStore.profilePicture==="" ? 'https://png.pngtree.com/png-vector/20220709/ourmid/pngtree-businessman-user-avatar-wearing-suit-with-red-tie-png-image_5809521.png' : tutorPrimaryInfoStore.profilePicture}  alt=''></img>
             </div>
             <div className='text-center title-1'>
-                <p>Name</p>
-                <p>Teacher ID</p>
+                <p style={{fontSize:'24px'}}>{tutorPrimaryInfoStore.tutorName}</p>
+                <p>{tutorPrimaryInfoStore.id}</p>
             </div>
             <div class='elements'>
                 <div className={dashboard === 0 ? 'active' : ''}><i class="fas fa-tachometer-alt"></i> Dashboard</div>
