@@ -8,7 +8,7 @@ import Swal from 'sweetalert2'
 import { logInStudent } from "../../api/student_api/RegisterStudentApi";
 
 function LoginComponent(props) {
-  const [setLoginType, setsetLoginType] = useState("student");
+  const [setLoginType, setsetLoginType] = useState("tutor");
   const [phoneNumber, setphoneNumber] = useState();
   const [password, setpassword] = useState("");
   const navigate = useNavigate();
